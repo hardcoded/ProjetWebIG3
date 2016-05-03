@@ -10,8 +10,10 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "pg": "4.X",
     "ejs": "2.4.1",
-    "express": "4.13.3"
+    "express": "4.13.3",
+    "cool-ascii-faces": "1.3.3"
   },
   "repository": {
     "type": "git",
