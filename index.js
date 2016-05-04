@@ -1,41 +1,42 @@
 var express = require('express');
 var app = express();
 var pg = require('pg');
+var logger = require('morgan');
+var cookieparser = require('cookie-parser');
+var cookiesession = require('cookie-session');
 
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
+app.use(logger('logs'));
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.get('/', function(request, response) {
-  response.render('pages/index');
+app.get('/', function(req, res) {
+  response
+  res.render('pages/index');
 });
 
-app.get('/cool', function(request, response) {
-  response.send(cool());
-});
-
-app.get('/times', function(request, response) {
+app.get('/times', function(req, res) {
     var result = ''
     var times = process.env.TIMES || 5
     for (i=0; i < times; i++)
       result += i + ' ';
-  response.send(result);
+  res.send(result);
 });
 
-app.get('/db', function (request, response) {
+app.get('/db', function (req, res) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     client.query('SELECT * FROM test_table', function(err, result) {
       done();
       if (err) {
         console.error(err);
-        response.send("Error" + err);
+        res.send("Error" + err);
       }
       else {
-        response.render('pages/db', {results: results.rows} );
+        res.render('pages/db', {results: results.rows} );
       }
     });
   });
