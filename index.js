@@ -20,6 +20,10 @@ app.get('/', function(req, res) {
   res.render('pages/index');
 });
 
+app.get('/signup', function(req, res) {
+  res.render('pages/signup');
+});
+
 app.get('/db', function (req, res) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     client.query('SELECT * FROM rank', function(err, result) {
