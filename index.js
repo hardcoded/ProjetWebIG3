@@ -24,6 +24,10 @@ app.get('/signup', function(req, res) {
   res.render('pages/signup');
 });
 
+app.get('/about', function(req, res) {
+  res.render('pages/about');
+});
+
 app.get('/db', function (req, res) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     client.query('SELECT * FROM rank', function(err, result) {
@@ -40,10 +44,10 @@ app.get('/db', function (req, res) {
 });
 
 app.post('/signup', function(req, res) {
-  console.log(req.body.user.firstName);
-  console.log(req.body.user.lastName);
-  console.log(req.body.user.mail);
-  console.log(req.body.user.phone);
+  console.log(req.body.userFirstName);
+  console.log(req.body.userLastName);
+  console.log(req.body.userMail);
+  console.log(req.body.userPhone);
 });
 
 app.listen(app.get('port'), function() {
