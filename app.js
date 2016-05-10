@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 var pg = require('pg');
-var routes = require('./routes');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -31,10 +30,15 @@ var jwtCheck = jwt({
 app.use('/user', jwtCheck);
 app.use('/forum', jwtCheck);
 
+// Database url
+var database = process.env.DATABASE_URL;
+
 // Routing resources
-app.get('/', routes.index);
-app.get('/db', routes.db);
-app.get('/user/:resource', routes.user);
+var routes = require('./routes/router.js');
+
+app.use('/', routes.index);
+app.use('/db', routes.db(pg, database));
+//app.get('/user/:resource', routes.user);
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
