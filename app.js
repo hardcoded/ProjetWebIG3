@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var path = require('path');
 var pg = require('pg');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -17,7 +18,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 // views is directory for all template files
-app.set('views', __dirname + '/views');
+app.set('views', path.join(__dirname, 'views'));
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
@@ -31,14 +32,21 @@ app.use('/user', jwtCheck);
 app.use('/forum', jwtCheck);
 
 // Database url
-var database = process.env.DATABASE_URL;
+var databaseURL = process.env.DATABASE_URL;
 
 // Routing resources
 var routes = require('./routes/router.js');
 
-app.use('/', routes.index);
-app.use('/db', routes.db(pg, database));
+app.get('/', routes.home);
+app.get('/db', routes.db);
 //app.get('/user/:resource', routes.user);
+
+app.use(function(err, req, res, next) {
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
+});
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
