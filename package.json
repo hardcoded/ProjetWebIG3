@@ -19,7 +19,8 @@
     "express-jwt": "3.4.0",
     "morgan": "~1.6.1",
     "pg": "4.x",
-    "serve-favicon": "2.3.0"
+    "serve-favicon": "2.3.0",
+    "less-middleware": "2.1.0"
   },
   "repository": {
     "type": "git",
