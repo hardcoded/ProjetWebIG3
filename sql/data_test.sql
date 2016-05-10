@@ -19,11 +19,11 @@ INSERT INTO section(acronym, name) VALUES ('MEA', 'Microélectronique et automat
 INSERT INTO section(acronym, name) VALUES ('STE', 'Sciences et technologies de l''eau');
 
 /* Create accounts */
-INSERT INTO account(first_name, last_name, mail, pseudo, password, signup_date, admin, tokens, rank, section) VALUES ('Johan', 'Brunet', 'brunet.johan.23@gmail.com', 'JohanBrunet', 'MotDePasse', CURRENT_DATE, true, '42000000', 1, 2);
-INSERT INTO account(first_name, last_name, mail, pseudo, password, signup_date, admin, tokens, rank, section) VALUES ('Théo', 'Gauchoux', 't.g@mail.com', 'TGauchoux', 'PassWord', CURRENT_DATE, false, '42000000', 1, 2);
-INSERT INTO account(first_name, last_name, mail, pseudo, password, signup_date, admin, tokens, rank, section) VALUES ('Charlène', 'Pizzoni', 'c.p@mail.com', 'CPizzoni', 'Password', CURRENT_DATE, false, '30', 7, 2);
-INSERT INTO account(first_name, last_name, mail, pseudo, password, signup_date, admin, tokens, rank, section) VALUES ('Mehdi', 'Fakihani', 'm.f@mail.com', 'MFakihani', 'motdepasse', CURRENT_DATE, false, '0', 9, 2);
-INSERT INTO account(first_name, last_name, mail, pseudo, password, signup_date, admin, tokens, rank, section) VALUES ('Quentin', 'Bouygues', 'q.b@mail.com', 'QBouygues', 'mdp', CURRENT_DATE, false, '65', 5, 2);
+INSERT INTO account(first_name, last_name, mail, pseudo, signup_date, admin, tokens, rank, section) VALUES ('Johan', 'Brunet', 'brunet.johan.23@gmail.com', 'JohanBrunet', CURRENT_DATE, true, '42000000', 1, 2);
+INSERT INTO account(first_name, last_name, mail, pseudo, signup_date, admin, tokens, rank, section) VALUES ('Théo', 'Gauchoux', 't.g@mail.com', 'TGauchoux', CURRENT_DATE, false, '42000000', 1, 2);
+INSERT INTO account(first_name, last_name, mail, pseudo, signup_date, admin, tokens, rank, section) VALUES ('Charlène', 'Pizzoni', 'c.p@mail.com', 'CPizzoni', CURRENT_DATE, false, '30', 7, 2);
+INSERT INTO account(first_name, last_name, mail, pseudo, signup_date, admin, tokens, rank, section) VALUES ('Mehdi', 'Fakihani', 'm.f@mail.com', 'MFakihani', CURRENT_DATE, false, '0', 9, 2);
+INSERT INTO account(first_name, last_name, mail, pseudo, signup_date, admin, tokens, rank, section) VALUES ('Quentin', 'Bouygues', 'q.b@mail.com', 'QBouygues', CURRENT_DATE, false, '65', 5, 2);
 
 /* Create projects */
 INSERT INTO project(name, description, helpers_min, helpers_max, start_date, end_date, achievment, rank_required) VALUES ('Infotech', 'Projet web', '0', '2', CURRENT_DATE, '2016-05-16', '15', 3);
