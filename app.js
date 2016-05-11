@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-var pg = require('pg');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -31,15 +30,17 @@ var jwtCheck = jwt({
 app.use('/user', jwtCheck);
 app.use('/forum', jwtCheck);
 
-// Database url
-var databaseURL = process.env.DATABASE_URL;
-
+// Database utilities
+var pg = require('pg');
+var url = process.env.DATABASE_URL;
+// DAOs
+var projectsDAO = require('./models/DAO/projectsDAO')(pg, url);
 // Routing resources
-var routes = require('./routes/router');
-
-app.use('/', routes);
+require('./routes/homeController').controller(app);
+require('./routes/projectsController').controller(app, projectsDAO);
 
 app.use(function(err, req, res, next) {
+    console.log(err);
     res.render('pages/error', {
         message: err.message,
         error: {}

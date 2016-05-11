@@ -35,8 +35,8 @@ CREATE TABLE project (
   id SERIAL PRIMARY KEY,
   name VARCHAR(30) NOT NULL,
   description VARCHAR(200),
-  helpers_min INTEGER,
-  helpers_max INTEGER NOT NULL,
+  min_helpers INTEGER,
+  max_helpers INTEGER NOT NULL,
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
   achievment INTEGER,
@@ -53,8 +53,7 @@ CREATE TABLE project_history (
   id SERIAL PRIMARY KEY,
   name VARCHAR(30) NOT NULL,
   description VARCHAR(200),
-  helpers_min INTEGER,
-  helpers_max INTEGER NOT NULL,
+  max_helpers INTEGER NOT NULL,
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
   achievment INTEGER NOT NULL,
@@ -100,17 +99,15 @@ CREATE TRIGGER check_rank_bfor_insrt BEFORE INSERT ON message
 
 CREATE OR REPLACE FUNCTION max_particip_ctrl() RETURNS TRIGGER AS $max_particip_ctrl$
 DECLARE
-  max_helpers INTEGER;
+  max INTEGER;
   helpers_registered INTEGER;
 BEGIN
   SELECT COUNT(*) INTO helpers_registered FROM participate
   WHERE id_project = NEW.id_project;
-  SELECT helpers_max INTO max_helpers FROM project
+  SELECT max_helpers INTO max FROM project
   WHERE id = NEW.id_project;
-  /*RAISE NOTICE 'Nombre d''aides proposées : %', helpers_registered;
-  RAISE NOTICE 'Nombre max d''aides : %', max_helpers;*/
-  IF helpers_registered >= max_helpers THEN
-    RAISE EXCEPTION 'Nombre maximal de personnes sur le projet atteint (%) !', max_helpers;
+  IF helpers_registered >= max THEN
+    RAISE EXCEPTION 'Nombre maximal de personnes sur le projet atteint (%) !', max;
   END IF;
   RETURN NEW;
 END;

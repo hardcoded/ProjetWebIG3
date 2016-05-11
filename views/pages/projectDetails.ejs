@@ -1,0 +1,15 @@
+<% layout('layout') -%>
+<h1> Projects </h1>
+<h2>Database Results</h2>
+<ul>
+  <% projects.forEach(function(p) { %>
+    <li>ID : <%= p.id %></li>
+    <li>Nom : <%= p.name %></li>
+    <li>Description : <%= p.description %></li>
+    <li>Max participants : <%= p.max_helpers %></li>
+    <li>Date de début : <%= p.start_date %></li>
+    <li>Date de fin : <%= p.end_date %></li>
+    <li>Pourcentage finition : <%= p.achievment %></li>
+    <li>Rang requis : <%= p.rank_required %></li>
+  <% }); %>
+</ul>

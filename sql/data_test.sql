@@ -1,4 +1,4 @@
-/* Create ranks */
+﻿/* Create ranks */
 INSERT INTO rank(name, description, tokens_required, limit_posts) VALUES ('Père fondateur', 'Rang réservé aux fondateurs d''Infotech', 42000000, 42000);
 INSERT INTO rank(name, description, tokens_required, limit_posts) VALUES ('Maitre Jedi', 'Rang ultime', 160, 130);
 INSERT INTO rank(name, description, tokens_required, limit_posts) VALUES ('Padawan', 'Dernier rang avant le rang ultime', 120, 100);
@@ -26,13 +26,12 @@ INSERT INTO account(first_name, last_name, mail, pseudo, signup_date, admin, tok
 INSERT INTO account(first_name, last_name, mail, pseudo, signup_date, admin, tokens, rank, section) VALUES ('Quentin', 'Bouygues', 'q.b@mail.com', 'QBouygues', CURRENT_DATE, false, '65', 5, 2);
 
 /* Create projects */
-INSERT INTO project(name, description, helpers_min, helpers_max, start_date, end_date, achievment, rank_required) VALUES ('Infotech', 'Projet web', '0', '2', CURRENT_DATE, '2016-05-16', '15', 3);
-INSERT INTO project(name, description, helpers_min, helpers_max, start_date, end_date, achievment, rank_required) VALUES ('Polythèque', 'Projet Java', '0', '5', '2015-10-20', '2016-01-20', '80', 5);
+INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required) VALUES ('Infotech', 'Projet web', '2', CURRENT_DATE, '2016-05-16', '15', 3);
+INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required) VALUES ('Polythèque', 'Projet Java', '5', '2015-10-20', '2016-01-20', '80', 5);
 
 /* Create helpers */
 INSERT INTO participate(id_project, id_helper) VALUES (1, 1);
 INSERT INTO participate(id_project, id_helper) VALUES (1, 2);
-INSERT INTO participate(id_project, id_helper) VALUES (1, 5);
 INSERT INTO participate(id_project, id_helper) VALUES (2, 1);
 INSERT INTO participate(id_project, id_helper) VALUES (2, 2);
 
@@ -47,4 +46,3 @@ INSERT INTO message(message, date_post, writer, topic) VALUES ('Bonjour j''ai be
 INSERT INTO message(message, date_post, writer, topic) VALUES ('Bonjour j''ai besoin d''aide pour un script Shell', '2016-05-03', 4, 3);
 INSERT INTO message(message, date_post, writer, topic) VALUES ('Bonjour j''ai besoin d''aide pour une classe Java', '2016-05-05', 4, 1);
 INSERT INTO message(message, date_post, writer, topic) VALUES ('Bonjour j''ai besoin d''aide pour un script PHP', '2016-05-06', 4, 2);
-INSERT INTO message(message, date_post, writer, topic) VALUES ('Bonjour j''ai besoin d''aide pour une méthode Java', '2016-05-08', 4, 1);

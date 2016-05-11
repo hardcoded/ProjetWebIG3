@@ -1,3 +1,8 @@
 <% layout('layout') -%>
 <h1> Projects </h1>
-<p> Content to be produced </p>
+<h2>Database Results</h2>
+<ul>
+  <% projects.forEach(function(p) { %>
+    <li><a href='/projects/<%= p.id %>'><%= p.id %> - <%= p.name %><a></li>
+  <% }); %>
+</ul>
