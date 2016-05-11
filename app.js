@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
-// views is directory for all template files
+// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
@@ -35,14 +35,12 @@ app.use('/forum', jwtCheck);
 var databaseURL = process.env.DATABASE_URL;
 
 // Routing resources
-var routes = require('./routes/router.js');
+var routes = require('./routes/router');
 
-app.get('/', routes.home);
-app.get('/db', routes.db);
-//app.get('/user/:resource', routes.user);
+app.use('/', routes);
 
 app.use(function(err, req, res, next) {
-    res.render('error', {
+    res.render('pages/error', {
         message: err.message,
         error: {}
     });

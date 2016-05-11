@@ -1,12 +1,23 @@
+// handling routes
+var express = require('express');
+var router = express.Router();
+
+// database utilities
+var pg = require('pg');
+var connectString = process.env.DATABASE_URL;
+
 /* GET home page */
-module.exports.home = function(req, res){
-  res.render('layout', {body: 'pages/index.ejs', title: 'Layout'});
-};
+router.get('/', function(req, res){
+  res.render('pages/index', {title: 'Infotech'});
+});
+
+router.get('/projects', function(req, res) {
+  res.render('pages/projects', {title: 'Projects'});
+});
 
 /* GET database connection test */
-module.exports.db = function(pg, connectString, req, res) {
+router.get('/database', function(req, res) {
   pg.connect(connectString, function(err, client, done) {
-    console.log('Connection established !');
     client.query('SELECT * FROM rank', function(err, result) {
       done();
       if (err) {
@@ -14,8 +25,10 @@ module.exports.db = function(pg, connectString, req, res) {
         res.render('error', { title: 'Error' });
       }
       else {
-        res.render('layout', { results: result.rows, body: 'pages/db.ejs', title: 'Data test' });
+        res.render('pages/db', { results: result.rows, title: 'Data test' });
       }
     });
   });
-};
+});
+
+module.exports =router;
