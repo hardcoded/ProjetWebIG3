@@ -1,3 +1,69 @@
 <% layout('layout') -%>
-<h1> Presentation page </h1>
-<p> Content to be produced </p>
+<div class="parallax-container">
+  <div class="parallax">
+    <img src="images/parallax_google_datacenter.png" alt="Some random google datacenter" class="responsive-img">
+  </div>
+</div>
+<div class="section white">
+  <div class="row container">
+    <div class ="row">
+      <h2 class="header grey-text center">Infotech</h2>
+      <h4 class="header grey-text center">Le hackerspace de Polytech Montpellier</h4>
+      <p>Infotech a été créé par des étudiants, pour des étudiants dans le but de partager sur divers sujets informatiques.
+      Le principe du hackerspace est que tout le monde peut venir, quelque soit son niveau, et peut :
+      <ul>
+        <li>travailler seul sur un projet personnel</li>
+        <li>se faire aider sur un projet personnel</li>
+        <li>proposer son aide pour travailler sur d'autres projets</li>
+      </ul>
+      </p>
+      <div class = "row card-panel hoverable grey lighten-5" id='menu_annonces_description'>
+        <div class="col l3" >
+          <p>
+            <strong>Experts</strong><br>
+            Vous connaissez 10 langages de programmation sur le bout des doigts, le 42 est votre nombre fétiche et l'été vous bronzez grâce à la lumière de votre(vos) écran(s) ?
+            <br>
+            Venez partager votre expérience avec des personnes plus novices, ou même obtenir de l'aide de quelqu'un de plus chevronné (eh oui ça existe !) !
+          </p>
+        </div>
+        <div class="col l3">
+          <p>
+            <strong>Novices</strong><br>
+            Votre expérience de l'informatique se résume à surfer sur le web, mais vous voulez plus que ça ?
+            Vous débutez et bataillez avec vos premiers programmes ?
+            <br>
+            Pas de panique ! Infotech est là pour vous !
+            Des personnes plus expérimentées pourront partager leur expérience avec vous et vous permettre d'avancer.
+          </p>
+        </div>
+        <div class="col l3">
+          <p>
+            <strong>Short talks</strong><br>
+            Au début de chaque session Infotech un short talk (~15 minutes) sera organisé pour présenter un sujet se rapportant à l'informatique.
+            <br>
+            Plutôt axés sur les nouvelles technologies, les short talks permettront de présenter ces nouvelles technologies et de donner envie de les approfondir.
+          </p>
+        </div>
+        <div class="col l3">
+          <p>
+            <strong>Projets</strong><br>
+            L'entraide sera un point central d'Infotech. C'est pourquoi ce site propose un système de partage de projets, pour permettre à chacun de pouvoir :
+            <ul>
+              <li>partager un projet por lequel il voudrais de l'aide</li>
+              <li>proposer son aide sur un projet qui l'intéresse</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="parallax-container">
+  <div class="parallax"><img src="images/parallax_programming_laguages.png" alt="Programming languages" class="responsive-img"></div>
+</div>
+
+<script>
+$(document).ready(function(){
+  $('.parallax').parallax();
+});
+</script>
