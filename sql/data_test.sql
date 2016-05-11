@@ -1,4 +1,4 @@
-﻿/* Create ranks */
+/* Create ranks */
 INSERT INTO rank(name, description, tokens_required, limit_posts) VALUES ('Père fondateur', 'Rang réservé aux fondateurs d''Infotech', 42000000, 42000);
 INSERT INTO rank(name, description, tokens_required, limit_posts) VALUES ('Maitre Jedi', 'Rang ultime', 160, 130);
 INSERT INTO rank(name, description, tokens_required, limit_posts) VALUES ('Padawan', 'Dernier rang avant le rang ultime', 120, 100);
@@ -26,23 +26,13 @@ INSERT INTO account(first_name, last_name, mail, pseudo, signup_date, admin, tok
 INSERT INTO account(first_name, last_name, mail, pseudo, signup_date, admin, tokens, rank, section) VALUES ('Quentin', 'Bouygues', 'q.b@mail.com', 'QBouygues', CURRENT_DATE, false, '65', 5, 2);
 
 /* Create projects */
-INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required) VALUES ('Infotech', 'Projet web', '2', CURRENT_DATE, '2016-05-16', '15', 3);
-INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required) VALUES ('Polythèque', 'Projet Java', '5', '2015-10-20', '2016-01-20', '80', 5);
+INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('Infotech', 'Site web du club d''informatique de Polytech Montpellier', '1', '2016-04-30', '2016-05-16', '30', 3, 1);
+INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('Polythèque', 'Projet Java de gestion de ludothèque', '5', '2015-10-20', '2016-01-20', '80', 5, 1);
+INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('Jarvis', 'Just A Rather Intelligent System', '1', '2016-04-30', '2016-05-16', '60', 2, 2);
+INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('G2ATools', 'Application web pour alertes G2A', '1', '2016-04-30', '2016-05-16', '30', 3, 5);
 
 /* Create helpers */
 INSERT INTO participate(id_project, id_helper) VALUES (1, 1);
-INSERT INTO participate(id_project, id_helper) VALUES (1, 2);
 INSERT INTO participate(id_project, id_helper) VALUES (2, 1);
-INSERT INTO participate(id_project, id_helper) VALUES (2, 2);
-
-/* Create topics */
-INSERT INTO topic(name) VALUES ('Java');
-INSERT INTO topic(name) VALUES ('PHP');
-INSERT INTO topic(name) VALUES ('Shell');
-
-/* Create messages */
-INSERT INTO message(message, date_post, writer, topic) VALUES ('Bonjour j''ai besoin d''aide pour mon projet Java', CURRENT_DATE, 4, 1);
-INSERT INTO message(message, date_post, writer, topic) VALUES ('Bonjour j''ai besoin d''aide pour mon projet PHP', '2016-05-07', 4, 2);
-INSERT INTO message(message, date_post, writer, topic) VALUES ('Bonjour j''ai besoin d''aide pour un script Shell', '2016-05-03', 4, 3);
-INSERT INTO message(message, date_post, writer, topic) VALUES ('Bonjour j''ai besoin d''aide pour une classe Java', '2016-05-05', 4, 1);
-INSERT INTO message(message, date_post, writer, topic) VALUES ('Bonjour j''ai besoin d''aide pour un script PHP', '2016-05-06', 4, 2);
+INSERT INTO participate(id_project, id_helper) VALUES (3, 2);
+INSERT INTO participate(id_project, id_helper) VALUES (4, 5);

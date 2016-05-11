@@ -40,7 +40,8 @@ CREATE TABLE project (
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
   achievment INTEGER,
-  rank_required SERIAl REFERENCES rank(id)
+  rank_required SERIAl REFERENCES rank(id),
+  owner SERIAL REFERENCES account(id)
 );
 
 CREATE TABLE participate (
@@ -60,42 +61,19 @@ CREATE TABLE project_history (
   rank_required SERIAL REFERENCES rank(id)
 );
 
-CREATE TABLE topic (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE message (
-  id SERIAL PRIMARY KEY,
-  message VARCHAR(500) NOT NULL,
-  date_post DATE,
-  writer SERIAL REFERENCES account(id),
-  topic SERIAL REFERENCES topic(id)
-);
-
+/*
 CREATE OR REPLACE FUNCTION rank_ctrl() RETURNS TRIGGER AS $rank_ctrl$
   DECLARE
-  cpt_mess INTEGER;
-  max_mess INTEGER;
+
   BEGIN
-  SELECT COUNT(*) INTO cpt_mess FROM message
-  WHERE writer = NEW.writer
-  AND date_post BETWEEN CURRENT_DATE-7 AND CURRENT_DATE;
-  SELECT limit_posts INTO max_mess FROM rank r, account a
-  WHERE r.id = a.rank
-  AND a.id = NEW.writer;
-  /*RAISE NOTICE 'Nombre de messages postés : %', cpt_mess;
-  RAISE NOTICE 'Nombre max de messages : %', max_mess;*/
-  IF cpt_mess >= max_mess THEN /* le compteur démarre à 0 */
-    RAISE EXCEPTION 'Nombre maximal de message pour votre rang atteint (%) !', max_mess;
-  END IF;
-  RETURN NEW;
+  Contrôle du rang avant de s'inscrire
 END;
 $rank_ctrl$ LANGUAGE plpgsql;
 
-CREATE TRIGGER check_rank_bfor_insrt BEFORE INSERT ON message
+CREATE TRIGGER check_rank_bfor_insrt BEFORE INSERT ON participate
   FOR EACH ROW
   EXECUTE PROCEDURE rank_ctrl();
+*/
 
 CREATE OR REPLACE FUNCTION max_particip_ctrl() RETURNS TRIGGER AS $max_particip_ctrl$
 DECLARE
@@ -116,15 +94,3 @@ $max_particip_ctrl$ LANGUAGE plpgsql;
 CREATE TRIGGER check_max_particip_bfor_insrt BEFORE INSERT ON participate
   FOR EACH ROW
   EXECUTE PROCEDURE max_particip_ctrl();
-
-/*
-CREATE TABLE event ()
-CREATE TABLE event_history ()
-CREATE TABLE inscription ()
-CREATE TABLE team ()
-CREATE TABLE hackaton ()
-CREATE TABLE lan ()
-CREATE TABLE game ()
-CREATE TABLE goodie ()
-CREATE TABLE sponsor ()
-*/
