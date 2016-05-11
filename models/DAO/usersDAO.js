@@ -1,15 +1,13 @@
 module.exports = function(db, url) {
   var module = {};
-
-  // Create new project
-  module.create = function(project, callback) {
+  // Create new user
+  module.create = function(user, callback) {
 
   };
-
-  // Retrieve projects (all of them or one in particular)
+  // Retrieve users (all of them or one in particular)
   module.getAll = function(callback) {
     db.connect(url, function(err, client, done) {
-      var queryString = 'SELECT * FROM project';
+      var queryString = 'SELECT * FROM account';
       client.query(queryString, function(err, result) {
         done();
         if (err) {
@@ -25,7 +23,7 @@ module.exports = function(db, url) {
 
   module.getById = function(id, callback) {
     db.connect(url, function(err, client, done) {
-      var queryString = 'SELECT * FROM project WHERE id = $1';
+      var queryString = 'SELECT * FROM account WHERE id = $1';
       client.query(queryString, [id], function(err, result) {
         done();
         if (err) {
@@ -38,13 +36,11 @@ module.exports = function(db, url) {
       });
     });
   };
-
-  // Update a project
-  module.update = function(project, callback) {
+    // Update a user
+  module.update = function(user, callback) {
 
   };
-
-  // Delete a project
+  // Delete a user
   module.delete = function(id, callback) {
 
   }
