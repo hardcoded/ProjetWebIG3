@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <% include partials/header %>
+    <title><%= title %></title>
+    <% include ../partials/header %>
   </head>
 
   <body>
     <header>
-      <% include partials/navbar %>
+      <% include ../partials/navbar %>
     </header>
     <main class="container">
       <%- body %>
     </main>
-    <% include partials/footer %>
+    <% include ../partials/footer %>
   </body>
 </html>
