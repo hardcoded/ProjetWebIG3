@@ -34,6 +34,9 @@ module.exports = function(db, url) {
           console.error(err);
           callback.fail(err);
         }
+        else if (result.rowCount == 0) {
+          callback.fail(null);
+        }
         else {
           var project = new Project(result.rows[0].id, result.rows[0].name, result.rows[0].description,
             result.rows[0].max_helpers, result.rows[0].start_date, result.rows[0].end_date, result.rows[0].achievment,
