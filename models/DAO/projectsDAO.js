@@ -1,3 +1,5 @@
+var Project = require('../POJOs/project.js');
+
 module.exports = function(db, url) {
   var module = {};
 
@@ -33,7 +35,10 @@ module.exports = function(db, url) {
           callback.fail(err);
         }
         else {
-          callback.success(result);
+          var project = new Project(result.rows[0].id, result.rows[0].name, result.rows[0].description,
+            result.rows[0].max_helpers, result.rows[0].start_date, result.rows[0].end_date, result.rows[0].achievment,
+            result.rows[0].rank_required, result.rows[0].owner)
+          callback.success(project);
         }
       });
     });

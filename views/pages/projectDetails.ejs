@@ -2,15 +2,13 @@
 <h1> Project </h1>
 <h2>Details</h2>
 <ul>
-  <% projects.forEach(function(p) { %>
-    <li>ID : <%= p.id %></li>
-    <li>Nom : <%= p.name %></li>
-    <li>Description : <%= p.description %></li>
-    <li>Max participants : <%= p.max_helpers %></li>
-    <li>Date de début : <%= p.start_date %></li>
-    <li>Date de fin : <%= p.end_date %></li>
-    <li>Pourcentage finition : <%= p.achievment %></li>
-    <li>Rank : <%= p.rank_required %></li>
-    <li>Owner : <%= p.owner %></li>
-  <% }); %>
+  <li>ID : <%= project.id %></li>
+  <li>Nom : <%= project.name %></li>
+  <li>Description : <%= project.description %></li>
+  <li>Max participants : <%= project.maxHelpers %></li>
+  <li>Date de début : <%= project.start %></li>
+  <li>Date de fin : <%= project.end %></li>
+  <li>Pourcentage finition : <%= project.achievment %></li>
+  <li>Rank : <%= project.rank %></li>
+  <li>Owner : <%= project.owner %></li>
 </ul>
