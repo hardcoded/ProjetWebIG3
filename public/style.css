@@ -9,3 +9,8 @@ body {
 main {
   flex: 1 0 auto;
 }
+
+footer {
+  position: absolute;
+  margin-bottom: auto;
+}
