@@ -13,7 +13,7 @@ app.set('port', (process.env.PORT));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/'));
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 // view engine setup
