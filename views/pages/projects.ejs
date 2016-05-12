@@ -1,8 +1,27 @@
 <% layout('layout') -%>
-<h1> Projects </h1>
-<h2>Database Results</h2>
-<ul>
-  <% projects.forEach(function(p) { %>
-    <li><a href='/projects/<%= p.id %>/infos'><%= p.id %> - <%= p.name %><a></li>
-  <% }); %>
-</ul>
+<div class="container">
+  <table class="highlight responsive-table centered">
+    <thead>
+      <tr>
+          <th data-field="id">ID</th>
+          <th data-field="name">Name</th>
+          <th data-field="price">Description</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% projects.forEach(function(p) { %>
+          <tr>
+            <td><%= p.id %></td>
+            <td><%= p.name %></td>
+            <td><%= p.description %></td>
+            <td>
+              <a class="waves-effect waves-light btn" href='/projects/<%= p.id %>'>
+                <i class="material-icons right">label_outline</i>Détails
+              </a>
+            </td>
+          </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>

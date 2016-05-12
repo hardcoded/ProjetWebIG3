@@ -13,11 +13,13 @@ app.set('port', (process.env.PORT));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(__dirname + '/'));
+
+// get static files such as CSS
+app.use(express.static(__dirname + '/public'));
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/views'));
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
@@ -39,6 +41,14 @@ var projectsDAO = require('./models/DAO/projectsDAO')(pg, url);
 require('./routes/homeController').controller(app);
 require('./routes/projectsController').controller(app, projectsDAO);
 
+// catch 404 and forwarding to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+// error handling
 app.use(function(err, req, res, next) {
     console.log(err);
     res.render('pages/error', {
