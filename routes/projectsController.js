@@ -22,7 +22,7 @@ module.exports.controller = function(app, DAO) {
       },
       fail : function(err) {
         res.status(404);
-        res.render('pages/error', {error: err});
+        res.render('pages/error', {title: 'Erreur', error: err});
       }
     });
   });
@@ -35,7 +35,8 @@ module.exports.controller = function(app, DAO) {
         res.render('pages/projects', {title: 'Project details', projects: result.rows});
       },
       fail : function(err) {
-        res.render('pages/error');
+        res.status(404);
+        res.render('pages/error', {title: 'Erreur', error: err});
       }
     });
   });
