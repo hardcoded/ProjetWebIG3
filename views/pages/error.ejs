@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <% include ../partials/header %>
-  </head>
-
-  <body>
-    <main class="container">
-      <h1>Erreur</h1>
-        <p><%= message %></p>
-      <h2>Status</h2>
-        <p><%= error.status %></p>
-      <h3>Stack</h3>
-        <p><%= error.stack %></p>
-    </main>
-  </body>
-</html>
+<% layout('layout') -%>
+<main class="container">
+  <h1>Erreur</h1>
+  <% if (error != null) { %>
+    <h2>Status</h2>
+      <p><%= status %></p>
+    <h3>Stack</h3>
+      <p><%= error.stack %></p>
+  <% } %>
+</main>
