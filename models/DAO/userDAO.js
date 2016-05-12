@@ -1,17 +1,17 @@
-var Project = require('../POJOs/project.js');
+var User = require('../POJOs/user.js');
 
 module.exports = function(db, url) {
   var module = {};
 
-  // Create new project
-  module.create = function(project, callback) {
+  // Create new user
+  module.create = function(user, callback) {
 
   };
 
-  // Retrieve projects (all of them or one in particular)
+  // Retrieve users (all of them or one in particular)
   module.getAll = function(callback) {
     db.connect(url, function(err, client, done) {
-      var queryString = 'SELECT * FROM project';
+      var queryString = 'SELECT * FROM account';
       client.query(queryString, function(err, result) {
         done();
         if (err) {
@@ -27,7 +27,7 @@ module.exports = function(db, url) {
 
   module.getById = function(id, callback) {
     db.connect(url, function(err, client, done) {
-      var queryString = 'SELECT * FROM project WHERE id = $1';
+      var queryString = 'SELECT * FROM account WHERE id = $1';
       client.query(queryString, [id], function(err, result) {
         done();
         if (err) {
@@ -38,24 +38,22 @@ module.exports = function(db, url) {
           callback.fail(null);
         }
         else {
-          var project = new Project(result.rows[0].id, result.rows[0].name, result.rows[0].description,
-            result.rows[0].max_helpers, result.rows[0].start_date, result.rows[0].end_date, result.rows[0].achievment,
-            result.rows[0].rank_required, result.rows[0].owner)
-          callback.success(project);
+          var user = new User(result.rows[0].id, result.rows[0].first_name, result.rows[0].last_name, result.rows[0].mail, result.rows[0].pseudo, result.rows[0].signup_date, result.rows[0].admin, result.rows[0].tokens, result.rows[0].rank, result.rows[0].section);
+          callback.success(user);
         }
       });
     });
   };
 
-  // Update a project
-  module.update = function(project, callback) {
+    // Update a user
+  module.update = function(user, callback) {
 
   };
 
-  // Delete a project
+  // Delete a user
   module.delete = function(id, callback) {
 
-  }
+  };
 
   return module;
 };

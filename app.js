@@ -36,10 +36,16 @@ app.use('/forum', jwtCheck);
 var pg = require('pg');
 var url = process.env.DATABASE_URL;
 // DAOs
-var projectsDAO = require('./models/DAO/projectsDAO')(pg, url);
+var projectDAO = require('./models/DAO/projectDAO')(pg, url);
+var userDAO = require('./models/DAO/userDAO')(pg, url);
+var rankDAO = require('./models/DAO/rankDAO')(pg, url);
 // Routing resources
 require('./routes/homeController').controller(app);
-require('./routes/projectsController').controller(app, projectsDAO);
+require('./routes/projectsController').controller(app, {
+  'projectDAO' : projectDAO,
+  'userDAO' : userDAO,
+  'rankDAO' : rankDAO
+});
 
 // catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
@@ -50,10 +56,12 @@ app.use(function(req, res, next) {
 
 // error handling
 app.use(function(err, req, res, next) {
-    console.log(err);
+    console.log('Erreur : \n' + err);
     res.render('pages/error', {
-        message: err.message,
-        error: {}
+      title: 'Erreur',
+      message: err.message,
+      status: err.status,
+      error: err
     });
 });
 

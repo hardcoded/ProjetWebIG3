@@ -12,5 +12,25 @@ main {
 
 footer {
   position: absolute;
-  margin-bottom: auto;
+  margin-bottom: inherit;
+}
+
+#card-container {
+  margin-top: 50px;
+}
+
+#my-card {
+  background-color: #f4f4f4;
+  width: 500px;
+  box-shadow: 2px 2px 20px 0px rgba(0,0,0,0.7);
+  border-radius: 20px;
+}
+
+.card-header {
+  border-bottom: solid 1px #B6B6B6;
+}
+
+.card-footer {
+  border-top: solid 1px #B6B6B6;
+  padding: 5px;
 }

@@ -1,6 +1,30 @@
 <% layout('layout') -%>
-<h1> Project </h1>
-<h2>Details</h2>
+<div class="container" id="card-container">
+  <div class="row">
+    <div class="card col l6 offset-l3 center-align" id="my-card">
+      <div class="card-header">
+        <h3 class="card-title"><%= project.name %></h3>
+      </div>
+      <div class="card-content">
+        <ul>
+          <i class="material-icons">description</i>Description<li><%= project.description %></li>
+          <i class="material-icons">perm_identity</i>Max participants<li><%= project.maxHelpers %></li>
+          <i class="material-icons">schedule</i>Date de début<li><%= project.start %></li>
+          <i class="material-icons">av_timer</i>Date de fin<li><%= project.end %></li>
+          <i class="material-icons">info</i>Pourcentage finition<li><%= project.achievment %> %</li>
+          <i class="material-icons">verified_user</i>Rank<li><%= rank.name %></li>
+          <i class="material-icons">supervisor_account</i>Owner<li><%= user.firstName %> <%= user.lastName %></li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a href="#">This is a link</a>
+        <a href="#">This is a link</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
 <ul>
   <li>ID : <%= project.id %></li>
   <li>Nom : <%= project.name %></li>
@@ -12,3 +36,4 @@
   <li>Rank : <%= project.rank %></li>
   <li>Owner : <%= project.owner %></li>
 </ul>
+-->
