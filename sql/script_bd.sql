@@ -8,8 +8,7 @@ CREATE TABLE rank (
  id SERIAL PRIMARY KEY,
  name VARCHAR(30) NOT NULL,
  description VARCHAR(200),
- tokens_required INTEGER NOT NULL,
- limit_posts INTEGER NOT NULL
+ tokens_required INTEGER NOT NULL
 );
 
 CREATE TABLE section (
@@ -35,7 +34,6 @@ CREATE TABLE project (
   id SERIAL PRIMARY KEY,
   name VARCHAR(30) NOT NULL,
   description VARCHAR(200),
-  min_helpers INTEGER,
   max_helpers INTEGER NOT NULL,
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
@@ -50,6 +48,7 @@ CREATE TABLE participate (
   PRIMARY KEY (id_project, id_helper)
 );
 
+/*
 CREATE TABLE project_history (
   id SERIAL PRIMARY KEY,
   name VARCHAR(30) NOT NULL,
@@ -60,20 +59,27 @@ CREATE TABLE project_history (
   achievment INTEGER NOT NULL,
   rank_required SERIAL REFERENCES rank(id)
 );
+*/
 
-/*
 CREATE OR REPLACE FUNCTION rank_ctrl() RETURNS TRIGGER AS $rank_ctrl$
   DECLARE
-
+    rank_check INTEGER;
+    actual_rank INTEGER;
   BEGIN
-  Contrôle du rang avant de s'inscrire
-END;
+    SELECT rank_required INTO rank_check FROM project pr, participate
+    WHERE pr.id = NEW.id_project;
+    SELECT rank INTO actual_rank FROM account a, participate
+    WHERE a.id = NEW.id_helper;
+    IF rank_check <= actual_rank THEN
+      RAISE EXCEPTION 'Votre rang ne vous permet pas de participer à ce projet !';
+    END IF;
+    RETURN NEW;
+  END;
 $rank_ctrl$ LANGUAGE plpgsql;
 
 CREATE TRIGGER check_rank_bfor_insrt BEFORE INSERT ON participate
   FOR EACH ROW
   EXECUTE PROCEDURE rank_ctrl();
-*/
 
 CREATE OR REPLACE FUNCTION max_particip_ctrl() RETURNS TRIGGER AS $max_particip_ctrl$
 DECLARE
