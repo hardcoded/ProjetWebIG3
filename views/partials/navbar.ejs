@@ -49,7 +49,7 @@
   var lock = new Auth0Lock('xqW3BC2q2q8nf6VlJlSjauumUNfaxG5X', 'app50173543.auth0.com');
   function signin() {
     lock.show({
-      callbackURL: 'https://infotech-polytech.herokuapp.com/callback',
+      callbackURL: 'http://infotech-polytech.herokuapp.com/callback',
       responseType: 'code',
       authParams: {
         scope: 'openid email'  // Learn about scopes: https://auth0.com/docs/scopes
