@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 // See express session docs for information on the options: https://github.com/expressjs/session
-app.use(session({ secret: 'SwAaLEBEYd-_gQAr0LVr3FA1ouIWYcBufuhUmGaLlPU-vezg9-Y3v6xsxa-HhscJ', resave: false,  saveUninitialized: false }));
+app.use(session({ secret: 'sFxiFSs3PPIX8HNnSyyYFOCZ9HZeL9PSC0X_b5AobiaOD3BT2JxVGNlUxdqbKaZy', resave: false,  saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 

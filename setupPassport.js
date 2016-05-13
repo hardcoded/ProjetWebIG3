@@ -2,10 +2,10 @@ var passport = require('passport');
 var Auth0Strategy = require('passport-auth0');
 
 var strategy = new Auth0Strategy({
-    domain:       'johanbrunet.eu.auth0.com',
-    clientID:     'yUfDGjyKKeONACrFia8kZ1xzHIsdlCmI',
-    clientSecret: 'SwAaLEBEYd-_gQAr0LVr3FA1ouIWYcBufuhUmGaLlPU-vezg9-Y3v6xsxa-HhscJ',
-    callbackURL:  '/'
+    domain:       'app50173543.auth0.com',
+    clientID:     'xqW3BC2q2q8nf6VlJlSjauumUNfaxG5X',
+    clientSecret: 'sFxiFSs3PPIX8HNnSyyYFOCZ9HZeL9PSC0X_b5AobiaOD3BT2JxVGNlUxdqbKaZy',
+    callbackURL:  '/callback'
   }, function(accessToken, refreshToken, extraParams, profile, done) {
     // accessToken is the token to call Auth0 API (not needed in the most cases)
     // extraParams.id_token has the JSON Web Token
