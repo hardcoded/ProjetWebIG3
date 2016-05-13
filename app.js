@@ -49,20 +49,27 @@ require('./routes/projectsController').controller(app, {
 
 // catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
+    var err = new Error('Resource Not Found');
     err.status = 404;
     next(err);
 });
 
 // error handling
 app.use(function(err, req, res, next) {
-    console.log('Erreur : \n' + err);
+  console.log('Erreur : \n' + err);
+  if(err.status == 404) {
+    res.render('pages/404', {
+      title: 'Erreur', error: err
+    });
+  }
+  else {
     res.render('pages/error', {
       title: 'Erreur',
       message: err.message,
       status: err.status,
       error: err
     });
+  }
 });
 
 app.listen(app.get('port'), function() {
