@@ -16,11 +16,12 @@
     "ejs": "2.4.1",
     "ejs-locals": "^1.0.2",
     "express": "4.13.3",
-    "express-jwt": "3.4.0",
+    "express-session": "1.13.0",
     "morgan": "~1.6.1",
     "pg": "4.x",
     "serve-favicon": "2.3.0",
-    "less-middleware": "2.1.0"
+    "passport": "O.3.2",
+    "passport-auth0": "0.5.1"
   },
   "repository": {
     "type": "git",

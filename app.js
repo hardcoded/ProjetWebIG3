@@ -1,18 +1,29 @@
+// Express for routing utilities
 var express = require('express');
 var app = express();
 var path = require('path');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
-var jwt = require('express-jwt');
+// for layout views
 var engine = require('ejs-locals');
+var passport = require('passport');
+// Session and cookies middlewares to keep user logged in
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+// This will configure Passport to use Auth0
+var strategy = require('./setupPassport');
 
 app.set('port', (process.env.PORT));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(cookieParser());
+// See express session docs for information on the options: https://github.com/expressjs/session
+app.use(session({ secret: 'SwAaLEBEYd-_gQAr0LVr3FA1ouIWYcBufuhUmGaLlPU-vezg9-Y3v6xsxa-HhscJ', resave: false,  saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // get static files such as CSS
 app.use(express.static(__dirname + '/public'));
@@ -22,15 +33,6 @@ app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.set('views', path.join(__dirname, '/views'));
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
-
-//Auth0 settings
-var jwtCheck = jwt({
-  secret: new Buffer('sFxiFSs3PPIX8HNnSyyYFOCZ9HZeL9PSC0X_b5AobiaOD3BT2JxVGNlUxdqbKaZy', 'base64'),
-  audience: 'xqW3BC2q2q8nf6VlJlSjauumUNfaxG5X'
-});
-//locking access to authorized users only
-app.use('/user', jwtCheck);
-app.use('/forum', jwtCheck);
 
 // Database utilities
 var pg = require('pg');
@@ -45,6 +47,19 @@ require('./routes/projectsController').controller(app, {
   'projectDAO' : projectDAO,
   'userDAO' : userDAO,
   'rankDAO' : rankDAO
+});
+require('./routes/usersController').controller(app, {});
+
+// Auth0 callback handler
+app.get('/callback', passport.authenticate('auth0', { failureRedirect: '/' }),
+  function(req, res) {
+    if (!req.user) {
+      console.log("login error");
+      throw new Error('user null');
+    }
+    console.log("App :\n" + app);
+    console.log("Passport : \n" + app.passport);
+  res.redirect("/user");
 });
 
 // catch 404 and forwarding to error handler
