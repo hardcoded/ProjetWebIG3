@@ -12,7 +12,8 @@ main {
 
 footer {
   position: absolute;
-  margin-bottom: inherit;
+  bottom: 0;
+  widht: 100%;
 }
 
 #card-container {
