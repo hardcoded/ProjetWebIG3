@@ -58,8 +58,6 @@ module.exports.controller = function(app, DAOs) {
     });
   });
 
-
-
   /* POST project */
   app.post('/projects/new', function(req, res) {
     //var newProject = new Project();
