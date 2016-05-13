@@ -1,0 +1,49 @@
+<% layout('layout') -%>
+<div class="row">
+   <form class="col s12" method="post" action="/signup">
+     <div class="container">
+       <div class="row">
+         <div class="input-field col l12">
+           <i class="material-icons prefix">perm_identity</i>
+           <input name="userFirstName" type="text" class="validate">
+           <label for="icon_prefix">Name</label>
+         </div>
+         <div class="input-field col l12">
+           <i class="material-icons prefix">description</i>
+           <input name="userLastName" type="text" class="validate">
+           <label for="icon_prefix">Description</label>
+         </div>
+         <div class="input-field col l12">
+           <i class="material-icons prefix">perm_identity</i>
+           <input id="max" name="maxHelpers" type="number" min="1" class="validate">
+           <label for="max">Participants maximum (min1)</label>
+         </div>
+         <div class="input-field col l12">
+           <i class="material-icons prefix">schedule</i>
+           <input id="start" name="startDate" type="date" class="validate">
+           <!--<label for="start">Date de début</label>-->
+         </div>
+         <div class="input-field col l12">
+           <i class="material-icons prefix">av_timer</i>
+           <input id="end" name="endDate" type="date" class="validate">
+           <!--<label for="end">Date de fin</label>-->
+         </div>
+         <div class="input-field col l12">
+           <i class="material-icons prefix">verified_user</i>
+           <input list="ranks" type="text" id="ranks_choose">
+           <datalist id="ranks">
+             <% ranks.forEach(function(r) { %>
+               <option value="<%= r.name %>">
+             <% }); %>
+           </datalist>
+           <label for="ranks_choose">Rang minimal requis</label>
+         </div>
+         <div class="input-field col l12">
+           <button class="btn waves-effect waves-light col s2 offset-s5" type="submit" name="action">Créer
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </div>
+    </div>
+   </form>
+ </div>
