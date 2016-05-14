@@ -1,5 +1,5 @@
 // If the page can't be accessed without login
-var requiresLogin = require('./requiresLogin');
+var requiresLogin = require('../requiresLogin');
 
 module.exports.controller = function(app, DAOs) {
   /* GET projects page */
