@@ -14,7 +14,7 @@ module.exports.controller = function(app, DAOs) {
   });
 
   /* GET projects page */
-  app.get('/projects/new', function(req, res) {
+  app.get('/projects/new', app.requiresLogin, function(req, res) {
     DAOs.rankDAO.getAll({
       success : function(result) {
         console.log('Query result :\n' + result);
@@ -60,11 +60,11 @@ module.exports.controller = function(app, DAOs) {
 
   /* POST project */
   app.post('/projects/new', function(req, res) {
-    //var newProject = new Project();
+    //var project = new Project(req.body.projectName, req.body.projectDesc, req.body.maxHelpers, req.body.startDate, req.body.endDate, );
     DAOs.projectDAO.create(project, {
       success : function(result) {
         res.status(201);
-        res.render('pages/projects', {title: 'Project details', projects: result.rows});
+        res.redirect('/projects');
       },
       fail : function(err) {
         res.status(404);

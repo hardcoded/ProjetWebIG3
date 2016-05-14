@@ -13,6 +13,8 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 // This will configure Passport to use Auth0
 var strategy = require('./setupPassport');
+// If the page can't be accessed without login
+var requiresLogin = require('../requiresLogin');
 
 app.set('port', (process.env.PORT));
 
@@ -54,11 +56,8 @@ require('./routes/usersController').controller(app, {});
 app.get('/callback', passport.authenticate('auth0', { failureRedirect: '/' }),
   function(req, res) {
     if (!req.user) {
-      console.log("login error");
       throw new Error('user null');
     }
-    console.log("App :\n" + app);
-    console.log("Passport : \n" + app.passport);
   res.redirect("/user");
 });
 

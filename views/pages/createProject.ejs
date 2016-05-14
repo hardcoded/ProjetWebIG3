@@ -5,28 +5,30 @@
        <div class="row">
          <div class="input-field col l12">
            <i class="material-icons prefix">perm_identity</i>
-           <input name="userFirstName" type="text" class="validate" required="required">
+           <input id="name" name="projectName" type="text" class="validate" required="required" length="30">
            <label for="icon_prefix">Name</label>
          </div>
          <div class="input-field col l12">
            <i class="material-icons prefix">description</i>
-           <input name="userLastName" type="text" class="validate" required="required">
-           <label for="icon_prefix">Description</label>
+           <textarea id="description" name="projectDesc" type="text" class="materialize-textarea validate" length="200"></textarea>
+           <label for="description">Description</label>
          </div>
          <div class="input-field col l12">
            <i class="material-icons prefix">perm_identity</i>
-           <input id="max" name="maxHelpers" type="number" min="1" class="validate" required>
+           <p  class="range-field">
+             <input type="range" id="max" min="1" max="8" />
+           </p>
            <label for="max">Participants maximum (min1)</label>
          </div>
          <div class="input-field col l12">
            <i class="material-icons prefix">schedule</i>
-           <input name="start" type="text" id="datepicker1"class="validate" required="required">
-           <label for="start">Date de début</label>
+           <input id="datepicker1" type="date" name="startDate" class="datepicker validate" required="required">
+           <label for="startDate">Date de début</label>
          </div>
          <div class="input-field col l12">
            <i class="material-icons prefix">av_timer</i>
-           <input name="end" type="text" id="datepicker2" class="validate" required="required">
-           <label for="end">Date de fin</label>
+           <input id="datepicker2"  type="date" name="endDate" class="datepicker validate" required="required">
+           <label for="endDate">Date de fin</label>
          </div>
          <div class="input-field col l12">
            <i class="material-icons prefix">verified_user</i>
@@ -50,29 +52,12 @@
 
  <script type="text/javascript">
   $(function() {
-    $("#datepicker1").datepicker({
-      closeText: 'Fermer',
-      prevText: 'Précédent',
-      nextText: 'Suivant',
-      monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-      monthNamesShort: ['Janv.', 'Fev.', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-      dayNames: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
-      dayNamesShort: ['Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.', 'Dim.'],
-      dayNamesMin: ['L', 'M', 'M', 'J', 'V', 'S', 'D'],
-      weekHeader: 'Sem.',
-      dateFormat: 'yy-mm-dd'
-    });
-    $( "#datepicker2" ).datepicker({
-      closeText: 'Fermer',
-      prevText: 'Précédent',
-      nextText: 'Suivant',
-      monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-      monthNamesShort: ['Janv.', 'Fev.', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-      dayNames: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
-      dayNamesShort: ['Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.', 'Dim.'],
-      dayNamesMin: ['L', 'M', 'M', 'J', 'V', 'S', 'D'],
-      weekHeader: 'Sem.',
-      dateFormat: 'yy-mm-dd'
+    $(document).ready(function() {
+      $('#name, #description').characterCounter();
     });
   });
+  $('.datepicker').pickadate({
+   selectMonths: true, // Creates a dropdown to control month
+   selectYears: 15 // Creates a dropdown of 15 years to control year
+ });
   </script>
