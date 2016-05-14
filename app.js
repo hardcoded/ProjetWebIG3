@@ -14,7 +14,7 @@ var session = require('express-session');
 // This will configure Passport to use Auth0
 var strategy = require('./setupPassport');
 // If the page can't be accessed without login
-var requiresLogin = require('../requiresLogin');
+var requiresLogin = require('./requiresLogin');
 
 app.set('port', (process.env.PORT));
 
