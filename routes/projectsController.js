@@ -14,7 +14,7 @@ module.exports.controller = function(app, DAOs) {
   });
 
   /* GET projects page */
-  app.get('/projects/new', app.requiresLogin, function(req, res) {
+  app.get('/projects/new', app.requiresLogin(), function(req, res) {
     DAOs.rankDAO.getAll({
       success : function(result) {
         console.log('Query result :\n' + result);
