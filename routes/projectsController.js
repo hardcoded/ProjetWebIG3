@@ -1,3 +1,6 @@
+// If the page can't be accessed without login
+var requiresLogin = require('./requiresLogin');
+
 module.exports.controller = function(app, DAOs) {
   /* GET projects page */
   app.get('/projects', function(req, res) {
@@ -14,7 +17,7 @@ module.exports.controller = function(app, DAOs) {
   });
 
   /* GET projects page */
-  app.get('/projects/new', app.requiresLogin(), function(req, res) {
+  app.get('/projects/new', requiresLogin, function(req, res) {
     DAOs.rankDAO.getAll({
       success : function(result) {
         console.log('Query result :\n' + result);
