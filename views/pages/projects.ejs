@@ -6,6 +6,7 @@
   <% include ../partials/navbarUser %>
 <% }; %>
 <div class="container">
+  <h1> <%= mess %> </h1>
   <table class="highlight responsive-table centered">
     <thead>
       <tr>
@@ -26,6 +27,13 @@
                 <i class="material-icons right">launch</i>Détails
               </a>
             </td>
+            <% if(p.owner == owner) { %>
+              <td>
+                <form method="post" action="/user/projects/<%= p.id %>/delete">
+                  <button class="btn waves-effect waves-light" type="submit" name="action">Supprimer</button>
+                </form>
+              </td>
+            <% }; %>
           </tr>
       <% }); %>
     </tbody>

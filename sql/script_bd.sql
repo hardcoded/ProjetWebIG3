@@ -39,12 +39,13 @@ CREATE TABLE project (
   end_date DATE NOT NULL,
   achievment INTEGER,
   rank_required SERIAl REFERENCES rank(id),
-  owner SERIAL REFERENCES account(id)
+  owner SERIAL REFERENCES account(id),
+  CHECK (start_date < end_date)
 );
 
 CREATE TABLE participate (
-  id_project SERIAL REFERENCES project(id),
-  id_helper SERIAL REFERENCES account(id),
+  id_project SERIAL REFERENCES project(id) ON DELETE CASCADE,
+  id_helper SERIAL REFERENCES account(id) ON DELETE CASCADE,
   PRIMARY KEY (id_project, id_helper)
 );
 

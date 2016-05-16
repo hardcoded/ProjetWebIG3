@@ -19,10 +19,14 @@ INSERT INTO section(acronym, name) VALUES ('MEA', 'Microélectronique et automat
 INSERT INTO section(acronym, name) VALUES ('STE', 'Sciences et technologies de l''eau');
 
 /* Create accounts */
-INSERT INTO account(first_name, last_name, mail, pseudo, password, admin, tokens, rank, section) VALUES ('Johan', 'BRUNET', 'brunet.johan.23@gmail.com', 'Johanonyme', 'sha1$5c9ac5ab$1$7a19b172fdc642c780684b7a8a22feef5d57aefa', true, 0, '9', '2');
+INSERT INTO account(first_name, last_name, mail, pseudo, password, admin, tokens, rank, section) VALUES ('Johan', 'BRUNET', 'brunet.johan.23@gmail.com', 'Johanonyme', 'sha1$5c9ac5ab$1$7a19b172fdc642c780684b7a8a22feef5d57aefa', true, 0, '1', '2');
+INSERT INTO account(first_name, last_name, mail, pseudo, password, admin, tokens, rank, section) VALUES ('User', 'Test', 'user.test@mail.fr', 'testuser', 'sha1$96c3a714$1$fbb287a4f0d418d6ac46a18d5b2548e72d71eade', false, 0, '9', '2');
 
 /* Create projects */
 INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('Infotech', 'Site web du club d''informatique de Polytech Montpellier', '1', '2016-04-30', '2016-05-16', '30', 3, 1);
+INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('Test', 'Mon projet test à supprimer', '3', '2016-04-30', '2016-05-16', '10', 8, 1);
+INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('Test', 'test affichage bouton suppr', '3', '2016-04-30', '2016-05-16', '10', 8, 2);
+
 
 /* Create helpers */
 INSERT INTO participate(id_project, id_helper) VALUES (1, 1);

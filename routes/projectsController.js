@@ -9,7 +9,7 @@ module.exports.controller = function(app, auth, DAOs) {
         DAOs.projectDAO.getAll({
           success : function(result) {
             res.status(200);
-            res.render('pages/projects', {title: 'Projects', projects: result.rows, authenticated: true});
+            res.render('pages/projects', { title: 'Projets', mess: "Projets soutenus par Infotech", projects: result.rows, authenticated: true, owner: id });
           },
           fail : function(err) {
             res.status(404);
@@ -21,7 +21,7 @@ module.exports.controller = function(app, auth, DAOs) {
         DAOs.projectDAO.getAll({
           success : function(result) {
             res.status(200);
-            res.render('pages/projects', {title: 'Projects', projects: result.rows, authenticated: false});
+            res.render('pages/projects', {title: 'Projets', mess: "Projets soutenus par Infotech", projects: result.rows, authenticated: false, owner: null});
           },
           fail : function(err) {
             res.status(404);
@@ -60,12 +60,12 @@ module.exports.controller = function(app, auth, DAOs) {
       success: function(id) {
         DAOs.projectDAO.getById(req.params.id, {
           success : function(project) {
-            DAOs.userDAO.getById(project.owner, {
+            DAOs.userDAO.getById(project.rows[0].owner, {
               success : function(user) {
-                DAOs.rankDAO.getById(project.rank, {
+                DAOs.rankDAO.getById(project.rows[0].rank_required, {
                   success : function(rank) {
                     res.status(200);
-                    res.render('pages/projectDetails', {title: 'Project details', project: project, user: user, rank: rank, authenticated: true});
+                    res.render('pages/projectDetails', {title: 'Project details', project: project.rows, user: user, rank: rank, authenticated: true});
                   },
                   fail : function(err) {
                     res.status(404);
@@ -88,12 +88,12 @@ module.exports.controller = function(app, auth, DAOs) {
       fail: function() {
         DAOs.projectDAO.getById(req.params.id, {
           success : function(project) {
-            DAOs.userDAO.getById(project.owner, {
+            DAOs.userDAO.getById(project.rows[0].owner, {
               success : function(user) {
-                DAOs.rankDAO.getById(project.rank, {
+                DAOs.rankDAO.getById(project.rows[0].rank_required, {
                   success : function(rank) {
                     res.status(200);
-                    res.render('pages/projectDetails', {title: 'Project details', project: project, user: user, rank: rank, authenticated: false});
+                    res.render('pages/projectDetails', {title: 'Project details', project: project.rows, user: user, rank: rank, authenticated: false});
                   },
                   fail : function(err) {
                     res.status(404);
@@ -120,6 +120,7 @@ module.exports.controller = function(app, auth, DAOs) {
   app.post('/projects/new', function(req, res) {
     auth.authenticate(req, {
       success: function(id) {
+        console.log(dateFormat(req.body.startDate, "isoDate"));
         var project = new Project(-1, req.body.projectName, req.body.projectDesc, req.body.maxHelpers,req.body.startDate, req.body.endDate, 0, req.body.rank, id);
         DAOs.projectDAO.create(project, {
           success : function(result) {
@@ -133,7 +134,7 @@ module.exports.controller = function(app, auth, DAOs) {
         });
       },
       fail: function() {
-        res.redirect('/projects/new');
+        res.redirect('/signin');
       }
     });
   });

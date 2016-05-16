@@ -12,6 +12,8 @@ var cookieParser = require('cookie-parser');
 var passwordHasher = require('password-hash');
 var uuid = require('node-uuid');
 var jwt = require('jsonwebtoken');
+// date formating utilities
+var dateFormat = require('dateformat');
 
 app.set('port', (process.env.PORT));
 
@@ -39,17 +41,20 @@ var projectDAO = require('./models/DAO/projectDAO')(pg, url);
 var userDAO = require('./models/DAO/userDAO')(pg, url);
 var rankDAO = require('./models/DAO/rankDAO')(pg, url);
 var sectionDAO = require('./models/DAO/sectionDAO')(pg, url);
+var participateDAO = require('./models/DAO/participateDAO')(pg, url);
 // Routing resources
 var authService = require('./routes/authService')(randomSecretKey, passwordHasher, jwt);
 require('./routes/homeController').controller(app, authService);
 require('./routes/projectsController').controller(app, authService, {
   'projectDAO' : projectDAO,
   'userDAO' : userDAO,
-  'rankDAO' : rankDAO
+  'rankDAO' : rankDAO,
+  'participateDAO': participateDAO
 });
 require('./routes/usersController').controller(app, authService, {
   'userDAO': userDAO,
-  'sectionDAO': sectionDAO
+  'projectDAO' : projectDAO,
+  'participateDAO': participateDAO
 });
 require('./routes/authController').controller(app, authService, {
   'userDAO': userDAO,
@@ -74,8 +79,6 @@ app.use(function(err, req, res, next) {
   else {
     res.render('pages/error', {
       title: 'Erreur',
-      message: err.message,
-      status: err.status,
       error: err
     });
   }

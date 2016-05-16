@@ -22,7 +22,8 @@
     "serve-favicon": "2.3.0",
     "password-hash": "~1.2.2",
     "node-uuid": "~1.4.7",
-    "jsonwebtoken": "~6.2.0"
+    "jsonwebtoken": "~6.2.0",
+    "dateformat": "1.0.12"
   },
   "repository": {
     "type": "git",

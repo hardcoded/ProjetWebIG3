@@ -8,38 +8,39 @@
 <div class="container" id="card-container">
   <div class="row">
     <div class="card col l6 offset-l3 center-align" id="my-card">
+      <% project.forEach(function(p) { %>
       <div class="card-header">
-        <h2 class="card-title header grey-text"><strong><%= project.name %></strong></h2>
+        <h2 class="card-title header grey-text"><strong><%= p.name %></strong></h2>
       </div>
       <div class="card-content">
         <div class="section">
           <i class="material-icons">description</i>Description
           <br>
-          <%= project.description %>
+          <%= p.description %>
         </div>
         <div class="divider"></div>
         <div class="section">
           <i class="material-icons">perm_identity</i>Max participants
           <br>
-          <%= project.maxHelpers %>
+          <%= p.maxHelpers %>
         </div>
         <div class="divider"></div>
         <div class="section">
           <i class="material-icons">schedule</i>Date de début
           <br>
-          <%= project.start %>
+          <%= p.start %>
         </div>
         <div class="divider"></div>
         <div class="section">
           <i class="material-icons">av_timer</i>Date de fin
           <br>
-          <%= project.end %>
+          <%= p.end %>
         </div>
         <div class="divider"></div>
         <div class="section">
           <i class="material-icons">info</i>Pourcentage finition
           <br>
-          <%= project.achievment %> %
+          <%= p.achievment %> %
         </div>
         <div class="divider"></div>
         <div class="section">
@@ -56,8 +57,11 @@
       </div>
       <div class="card-footer">
         <p>Ce projet vous intéresse ?</p>
-        <a class="waves-effect waves-light btn" href='/projects/<%= project.id %>/pseudo'>Participez !</a>
+        <form class="col s12" method="post" action="/projects/<%= project.id %>/particpate">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Participez !</button>
+        </form>
       </div>
+      <% }); %>
     </div>
   </div>
 </div>

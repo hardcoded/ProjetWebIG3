@@ -54,10 +54,51 @@ module.exports = function(db, url) {
           callback.fail(null);
         }
         else {
+          //var project = new Project(result.rows[0].id, result.rows[0].name, result.rows[0].description,
+          //  result.rows[0].max_helpers, result.rows[0].start_date, result.rows[0].end_date, result.rows[0].achievment,
+          //  result.rows[0].rank_required, result.rows[0].owner)
+          callback.success(result);
+        }
+      });
+    });
+  };
+
+  module.getByName = function(name, callback) {
+    db.connect(url, function(err, client, done) {
+      var queryString = 'SELECT * FROM project WHERE name = $1';
+      client.query(queryString, [name], function(err, result) {
+        done();
+        if (err) {
+          console.error(err);
+          callback.fail(err);
+        }
+        else if (result.rowCount == 0) {
+          callback.fail(null);
+        }
+        else {
           var project = new Project(result.rows[0].id, result.rows[0].name, result.rows[0].description,
             result.rows[0].max_helpers, result.rows[0].start_date, result.rows[0].end_date, result.rows[0].achievment,
             result.rows[0].rank_required, result.rows[0].owner)
           callback.success(project);
+        }
+      });
+    });
+  };
+
+  module.getByOwner = function(owner, callback) {
+    db.connect(url, function(err, client, done) {
+      var queryString = 'SELECT * FROM project WHERE owner = $1';
+      client.query(queryString, [owner], function(err, result) {
+        done();
+        if (err) {
+          console.error(err);
+          callback.fail(err);
+        }
+        else if (result.rowCount == 0) {
+          callback.fail(null);
+        }
+        else {
+          callback.success(result);
         }
       });
     });
@@ -70,7 +111,19 @@ module.exports = function(db, url) {
 
   // Delete a project
   module.delete = function(id, callback) {
-
+    db.connect(url, function(err, client, done) {
+      var queryString = 'DELETE FROM project WHERE id = $1';
+      client.query(queryString, [id], function(err, result) {
+        done();
+        if (err) {
+          console.error(err);
+          callback.fail(err);
+        }
+        else {
+          callback.success(result);
+        }
+      });
+    });
   };
 
   return module;
