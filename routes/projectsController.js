@@ -65,6 +65,8 @@ module.exports.controller = function(app, auth, DAOs) {
             DAOs.rankDAO.getAll({
               success: function(rank) {
                 if(id == proj.owner) {
+                  proj.start = dateFormat(proj.start, "fullDate");
+                  proj.end = dateFormat(proj.end, "fullDate");
                   res.status(200);
                   res.render('pages/updateProject', {title: 'Modifier projet', project: proj, ranks: rank.rows, authenticated:true})
                 }

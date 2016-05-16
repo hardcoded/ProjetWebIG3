@@ -25,7 +25,7 @@ INSERT INTO account(first_name, last_name, mail, pseudo, password, admin, tokens
 /* Create projects */
 INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('Infotech', 'Site web du club d''informatique de Polytech Montpellier', '1', '2016-04-30', '2016-05-16', '30', 3, 1);
 INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('Test', 'Mon projet test à supprimer', '3', '2016-04-30', '2016-05-16', '10', 8, 1);
-INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('Test', 'test affichage bouton suppr', '3', '2016-04-30', '2016-05-16', '10', 8, 2);
+INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('Test', 'test modif proj', '3', '2016-04-30', '2016-05-16', '10', 8, 2);
 
 
 /* Create helpers */

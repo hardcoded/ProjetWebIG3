@@ -107,8 +107,6 @@ module.exports = function(db, url) {
   // Update a project
   module.update = function(project, callback) {
     db.connect(url, function(err, client, done) {
-      console.log('project dao');
-      console.log(project);
       var queryString = 'UPDATE project SET description=$1, max_helpers=$2, start_date=$3, end_date=$4, achievment=$5, rank_required=$6  WHERE id=$7 RETURNING id';
       client.query(queryString, [project.description, project.maxHelpers, project.start, project.end, project.achievment, project.rank, project.id], function(err, result) {
         done();

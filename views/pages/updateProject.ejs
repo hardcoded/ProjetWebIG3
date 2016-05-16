@@ -23,18 +23,18 @@
          </div>
          <div class="input-field col l12">
            <i class="material-icons prefix">schedule</i>
-           <input id="datepicker1" type="date" name="startDate" class="datepicker validate" required="required">
+           <input id="datepicker1" type="date" name="startDate" value="<%= project.start %>" class="datepicker validate" required="required">
            <label for="startDate">Date de début</label>
          </div>
          <div class="input-field col l12">
            <i class="material-icons prefix">av_timer</i>
-           <input id="datepicker2"  type="date" name="endDate" class="datepicker validate" required="required">
+           <input id="datepicker2"  type="date" name="endDate" value="<%= project.end %>" class="datepicker validate" required="required">
            <label for="endDate">Date de fin</label>
          </div>
          <div class="input-field col l12">
            <i class="material-icons prefix">perm_identity</i>
            <p  class="range-field">
-             <input name="achievement" value="<%= project.maxHelpers %>" type="range" id="achieved" min="1" max="100" />
+             <input name="achievement" value="<%= project.achievement %>" type="range" id="achieved" min="1" max="100" />
            </p>
            <label for="achieved">Pourcentage de finition</label>
          </div>
