@@ -229,9 +229,8 @@ module.exports.controller = function(app, auth, DAOs) {
       success: function(id) {
         DAOs.projectDAO.getById(req.params.id, {
           success: function(proj) {
-            if(id == proj.rows[0].owner) {
-              var project = new Project(-1, req.body.projectName, req.body.projectDesc, req.body.maxHelpers,req.body.startDate, req.body.endDate, req.body.achievement, req.body.rank, id);
-              DAOs.projectDAO.update(project, {
+            if(id == proj.owner) {
+              DAOs.projectDAO.delete(proj.id, {
                 success : function(result) {
                   res.status(201);
                   res.redirect('/user/projects');
