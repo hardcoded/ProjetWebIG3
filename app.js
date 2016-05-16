@@ -12,8 +12,6 @@ var cookieParser = require('cookie-parser');
 var passwordHasher = require('password-hash');
 var uuid = require('node-uuid');
 var jwt = require('jsonwebtoken');
-// date formating utilities
-var dateFormat = require('dateformat');
 
 app.set('port', (process.env.PORT));
 
@@ -54,6 +52,7 @@ require('./routes/projectsController').controller(app, authService, {
 require('./routes/usersController').controller(app, authService, {
   'userDAO': userDAO,
   'projectDAO' : projectDAO,
+  'rankDAO' : rankDAO,
   'participateDAO': participateDAO
 });
 require('./routes/authController').controller(app, authService, {

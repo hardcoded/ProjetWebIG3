@@ -1,0 +1,72 @@
+<% layout('layout') -%>
+<% include ../partials/navbarUser %>
+<div class="row">
+   <form class="col s12" method="post" action="/projects/<%= project.id %>/update">
+     <div class="container">
+       <div class="row">
+         <div class="input-field col l12">
+           <i class="material-icons prefix">perm_identity</i>
+           <input id="name" name="projectName" type="text" value="<%= project.name %>" disabled="disabled">
+           <label for="icon_prefix">Name</label>
+         </div>
+         <div class="input-field col l12">
+           <i class="material-icons prefix">description</i>
+           <textarea id="description" name="projectDesc" type="text" class="materialize-textarea validate" length="200"><%= project.description %></textarea>
+           <label for="description">Description</label>
+         </div>
+         <div class="input-field col l12">
+           <i class="material-icons prefix">perm_identity</i>
+           <p  class="range-field">
+             <input name="maxHelpers" value="<%= project.maxHelpers %>" type="range" id="max" min="1" max="8" />
+           </p>
+           <label for="max">Participants maximum (min1)</label>
+         </div>
+         <div class="input-field col l12">
+           <i class="material-icons prefix">schedule</i>
+           <input id="datepicker1" type="date" name="startDate" class="datepicker validate" required="required">
+           <label for="startDate">Date de début</label>
+         </div>
+         <div class="input-field col l12">
+           <i class="material-icons prefix">av_timer</i>
+           <input id="datepicker2"  type="date" name="endDate" class="datepicker validate" required="required">
+           <label for="endDate">Date de fin</label>
+         </div>
+         <div class="input-field col l12">
+           <i class="material-icons prefix">perm_identity</i>
+           <p  class="range-field">
+             <input name="achievement" value="<%= project.maxHelpers %>" type="range" id="achieved" min="1" max="100" />
+           </p>
+           <label for="achieved">Pourcentage de finition</label>
+         </div>
+         <div class="input-field col l12">
+           <i class="material-icons prefix">verified_user</i>
+            <select name="rank">
+              <option value="" disabled selected>Choisissez un rang</option>
+              <% ranks.forEach(function(r) { %>
+                <option value="<%= r.name %>"><%= r.name %></option>
+              <% }) %>
+            </select>
+          <label>Rang minimal requis</label>
+        </div>
+         <div class="input-field col l12">
+           <button class="btn waves-effect waves-light col s2 offset-s5" type="submit" name="action">Créer
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </div>
+    </div>
+   </form>
+ </div>
+
+<script type="text/javascript">
+  $(function() {
+    $(document).ready(function() {
+      $('#name, #description').characterCounter();
+    });
+  });
+  $('.datepicker').pickadate({
+   selectMonths: true, // Creates a dropdown to control month
+   selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
+  $('select').material_select();
+</script>

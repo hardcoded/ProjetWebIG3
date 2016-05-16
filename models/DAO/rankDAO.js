@@ -45,6 +45,26 @@ module.exports = function(db, url) {
     });
   };
 
+  module.getByName = function(name, callback) {
+    db.connect(url, function(err, client, done) {
+      var queryString = 'SELECT * FROM rank WHERE name = $1';
+      client.query(queryString, [name], function(err, result) {
+        done();
+        if (err) {
+          console.error(err);
+          callback.fail(err);
+        }
+        else if (result.rowCount == 0) {
+          callback.fail(null);
+        }
+        else {
+          var rank = new Rank(result.rows[0].id, result.rows[0].name, result.rows[0].description, result.rows[0].tokens_equired);
+          callback.success(rank);
+        }
+      });
+    });
+  };
+
   // Update a rank
   module.update = function(rank, callback) {
 

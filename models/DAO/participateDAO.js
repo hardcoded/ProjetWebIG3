@@ -4,10 +4,6 @@ module.exports = function(db, url) {
 
   // Create new project
   module.create = function(projectID, helperID, callback) {
-    console.log('Project :\n');
-    console.log(projectID);
-    console.log('User :\n');
-    console.log(helperID);
     db.connect(url, function(err, client, done) {
       var queryString = 'INSERT INTO participate(id_project, id_helper) VALUES ($1, $2)';
       client.query(queryString, [projectID, helperID], function(err, result) {

@@ -29,8 +29,15 @@
             </td>
             <% if(p.owner == owner) { %>
               <td>
-                <form method="post" action="/user/projects/<%= p.id %>/delete">
-                  <button class="btn waves-effect waves-light" type="submit" name="action">Supprimer</button>
+                <a class="waves-effect waves-light btn" href='/projects/<%= p.id %>/update'>
+                  <i class="material-icons right">mode_edit</i>
+                </a>
+              </td>
+              <td>
+                <form method="post" action="/projects/<%= p.id %>/delete">
+                  <button class="btn waves-effect waves-light" type="submit" name="action">
+                    <i class="material-icons right">delete</i>
+                  </button>
                 </form>
               </td>
             <% }; %>
