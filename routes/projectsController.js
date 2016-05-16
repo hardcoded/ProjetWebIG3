@@ -56,7 +56,7 @@ module.exports.controller = function(app, auth, DAOs) {
     });
   });
 
-  /* POST project */
+  /* GET project update */
   app.get('/projects/:id/update', function(req, res) {
     auth.authenticate(req, {
       success: function(id) {
@@ -151,6 +151,57 @@ module.exports.controller = function(app, auth, DAOs) {
             res.render('pages/error', {title: 'Erreur', error: err});
           }
         });
+      }
+    });
+  });
+
+  /* POST project */
+  app.post('/projects/new', function(req, res) {
+    auth.authenticate(req, {
+      success: function(id) {
+        DAOs.rankDAO.getByName(req.body.rank, {
+          success: function(rank) {
+            var project = new Project(-1, req.body.projectName, req.body.projectDesc, req.body.maxHelpers, dateFormat(req.body.startDate, "isoDate"), dateFormat(req.body.endDate, "isoDate"), 0, rank.id, id);
+            DAOs.projectDAO.create(project, {
+              success : function(result) {
+                res.status(201);
+                res.redirect('/projects');
+              },
+              fail : function(err) {
+                res.status(404);
+                res.render('pages/error', {title: 'Erreur', error: err});
+              }
+            });
+          },
+          fail: function(err) {
+            res.render('pages/error', {title: 'Erreur', error: err});
+          }
+        });
+      },
+      fail: function() {
+        res.redirect('/signin');
+      }
+    });
+  });
+
+  /* POST project particpation */
+  app.get('/projects/:id/particpate', function(req, res) {
+    auth.authenticate(req, {
+      success: function(id) {
+        console.log(id);
+        console.log(req.params.id);
+        DAOs.particpateDAO.create(req.params.id, id, {
+          success : function(project) {
+            res.status(201);
+            res.redirect('/');
+          },
+          fail : function (err) {
+            res.render('pages/error', {title: 'Erreur', error: err});
+          }
+        });
+      },
+      fail: function() {
+        res.redirect('/signin');
       }
     });
   });

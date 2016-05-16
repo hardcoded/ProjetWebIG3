@@ -28,7 +28,6 @@ module.exports.controller = function(app, auth,  DAOs) {
       success: function(id) {
         DAOs.participateDAO.getByHelper(id, {
           success : function(result) {
-            console.log(result);
             DAOs.projectDAO.getById(result, {
               succes: function(res) {
                 res.status(200);
