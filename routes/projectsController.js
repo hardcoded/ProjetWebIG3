@@ -99,8 +99,10 @@ module.exports.controller = function(app, auth, DAOs) {
           success : function(project) {
             DAOs.userDAO.getById(project.owner, {
               success : function(user) {
-                DAOs.rankDAO.getById(project.rank_required, {
+                DAOs.rankDAO.getById(project.rank, {
                   success : function(rank) {
+                    proj.start = dateFormat(proj.start, "fullDate");
+                    proj.end = dateFormat(proj.end, "fullDate");
                     res.status(200);
                     res.render('pages/projectDetails', {title: 'Project details', project: project, user: user, rank: rank, authenticated: true});
                   },
