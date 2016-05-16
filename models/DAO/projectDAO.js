@@ -5,7 +5,23 @@ module.exports = function(db, url) {
 
   // Create new project
   module.create = function(project, callback) {
-
+    db.connect(url, function(err, client, done) {
+      var queryString = 'INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id';
+      client.query(queryString, [project.name, project.description, project.maxHelpers, project.startDate, project.endDate, project.achievment, project.rank_required, project.owner], function(err, result) {
+        done();
+        if (err) {
+          console.error(err);
+          callback.fail(err);
+        }
+        else if (result.rowCount == 0) {
+          callback.fail(null);
+        }
+        else {
+          project.id = result.rows[0].id;
+          callback.success(project);
+        }
+      });
+    });
   };
 
   // Retrieve projects (all of them or one in particular)

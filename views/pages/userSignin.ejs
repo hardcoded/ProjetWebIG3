@@ -1,0 +1,24 @@
+<% layout('layout') -%>
+<% include ../partials/navbar %>
+<div class="row">
+   <div class="container">
+     <form class="col s12" method="post" action="/signin">
+       <div class="row">
+         <div class="input-field col s6 offset-s3">
+           <i class="material-icons prefix">perm_identity</i>
+           <input name="userPseudo" type="text" class="validate">
+           <label for="icon_prefix">Pseudo</label>
+         </div>
+         <div class="input-field col s6 offset-s3">
+           <i class="material-icons prefix">lock</i>
+           <input name="userPwd" type="password" class="validate">
+           <label for="icon_prefix">Mot de passe</label>
+         </div>
+         <button class="btn waves-effect waves-light col s2 offset-s5" type="submit" name="action">Submit
+           <i class="material-icons right">send</i>
+         </button>
+      </div>
+      <a class="col s3 offset-s5 waves-effect waves-light btn" href="/signup">Pas encore insrit ?</a>
+    </form>
+  </div>
+</div>

@@ -23,7 +23,7 @@ CREATE TABLE account (
   last_name VARCHAR(30) NOT NULL,
   mail VARCHAR(50) NOT NULL,
   pseudo VARCHAR(30) NOT NULL,
-  signup_date DATE NOT NULL,
+  password VARCHAR(200) NOT NULL,
   admin BOOLEAN NOT NULL,
   tokens INTEGER NOT NULL,
   rank SERIAL REFERENCES rank(id),

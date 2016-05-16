@@ -1,58 +1,56 @@
 <% layout('layout') -%>
+<% include ../partials/navbar %>
 <div class="row">
    <form class="col s12" method="post" action="/signup">
      <div class="row">
        <div class="input-field col s6">
          <i class="material-icons prefix">perm_identity</i>
-         <input name="userFirstName" type="text" class="validate">
+         <input name="userFirstName" type="text" class="validate" required="required">
          <label for="icon_prefix">First Name</label>
        </div>
        <div class="input-field col s6">
          <i class="material-icons prefix">perm_identity</i>
-         <input name="userLastName" type="text" class="validate">
+         <input name="userLastName" type="text" class="validate" required="required">
          <label for="icon_prefix">Last Name</label>
        </div>
        <div class="input-field col s6">
          <i class="material-icons prefix">email</i>
-         <input name="userMail" type="email" class="validate">
+         <input name="userMail" type="email" class="validate" required="required">
          <label for="icon_prefix">Mail</label>
        </div>
        <div class="input-field col s6">
          <i class="material-icons prefix">phone</i>
-         <input name="userPhone" type="tel" class="validate">
+         <input name="userPhone" type="tel" class="validate" required="required">
          <label for="icon_telephone">Telephone</label>
        </div>
      </div>
      <div class="input-field col s12">
        <i class="material-icons prefix">info</i>
-       <select>
+       <select name="userSection" required="required">
          <option value="" disabled selected>Choisissez votre section</option>
-         <!-- TODO: ajouter une option par section récupérée dans la base de données (section DAO) -->
-         <option value="1">IG</option>
-         <option value="2">MEA</option>
-         <option value="3">MAT</option>
-         <option value="4">STE</option>
+         <% section.forEach(function(s) { %>
+           <option value="<%= s.acronym %>"><%= s.acronym %></option>
+         <% }) %>
        </select>
-       <label for="icon_prefix">Section</label>
+     <label>Section</label>
      </div>
-     <div class="input-field col s12">
+     <div class="input-field col s6">
        <i class="material-icons prefix">perm_identity</i>
-       <input name="userLastName" type="text" class="validate">
+       <input name="userPseudo" type="text" class="validate" required="required">
        <label for="icon_prefix">Pseudo</label>
      </div>
      <div class="input-field col s6">
        <i class="material-icons prefix">lock</i>
-       <input name="userMail" type="email" class="validate">
+       <input name="userPwd" type="password" class="validate" required="required">
        <label for="icon_prefix">Mot de passe</label>
      </div>
-     <div class="input-field col s6">
-       <i class="material-icons prefix">lock</i>
-       <input name="userPhone" type="tel" class="validate">
-       <label for="icon_telephone">Confirmation</label>
-     </div>
-   </div>
      <button class="btn waves-effect waves-light col s2 offset-s5" type="submit" name="action">Submit
-        <i class="material-icons right">send</i>
-      </button>
-   </form>
- </div>
+       <i class="material-icons right">send</i>
+     </button>
+   </div>
+  </form>
+</div>
+
+ <script type="text/javascript">
+   $('select').material_select();
+ </script>

@@ -1,4 +1,10 @@
 <% layout('layout') -%>
+<% if(!authenticated) { %>
+  <% include ../partials/navbar %>
+<% }; %>
+<% if(authenticated) { %>
+  <% include ../partials/navbarUser %>
+<% }; %>
 <div class="container">
   <table class="highlight responsive-table centered">
     <thead>

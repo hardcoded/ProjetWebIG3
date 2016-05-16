@@ -12,13 +12,21 @@
       <ul class="right hide-on-med-and-down">
         <li><a class="waves-effect waves-light btn-flat" href="/users">Utilisateurs</a></li>
         <li><a class="dropdown-button waves-effect waves-light btn-flat" href="/projects" data-activates="projects">Projets</a></li>
-        <li><a class="waves-effect waves-light btn" href="#" id="login">Déconnexion</a></li>
+        <li>
+          <form class="col s12" method="post" action="/signout">
+            <button class="btn waves-effect waves-light col s2 offset-s5" type="submit" name="action">Déconnexion</button>
+          </form>
+        </li>
       </ul>
       <ul class="side-nav" id="slide-out">
         <li><a class="waves-effect waves-light btn-small" href="/projects">Projets</a></li>
         <li><a class="waves-effect waves-light btn-small" href="/projects/owned">Mes projets</a></li>
         <li><a class="waves-effect waves-light btn-small" href="/projects/participations">Participations</a></li>
-        <li><a class="waves-effect waves-light btn-small" href="#" id="login">Déconnexion</a></li>
+        <li>
+          <form class="col s12" method="post" action="/signout">
+            <button class="btn waves-effect waves-light col s2 offset-s5" type="submit" name="action">Déconnexion</button>
+          </form>
+        </li>
       </ul>
       <a href="#" data-activates="slide-out" class="button-collapse right"><i class="material-icons">menu</i></a>
     </div>
@@ -42,21 +50,4 @@
       alignment: 'left' // Displays dropdown with edge aligned to the left of button
     }
   );
-</script>
-
-<!-- Script to call Auth0 authentication handler -->
-<script src="https://cdn.auth0.com/js/lock-9.1.min.js"></script>
-<script type="text/javascript">
-  var lock = new Auth0Lock('xqW3BC2q2q8nf6VlJlSjauumUNfaxG5X', 'app50173543.auth0.com');
-  var login = document.querySelector('a#login');
-  login.onclick = function (e) {
-    e.preventDefault();
-    lock.show(function onLogin(err, profile, id_token) {
-      if (err) {
-        // There was an error logging the user in
-        return alert(err.message);
-      }
-      // User is logged in
-    });
-  };
 </script>

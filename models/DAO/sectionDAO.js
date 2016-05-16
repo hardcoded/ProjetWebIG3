@@ -39,6 +39,22 @@ module.exports = function(db, url) {
     });
   };
 
+  module.getByName = function(name, callback) {
+    db.connect(url, function(err, client, done) {
+      var queryString = 'SELECT * FROM section WHERE acronym = $1';
+      client.query(queryString, [name], function(err, result) {
+        done();
+        if (err) {
+          console.error(err);
+          callback.fail(err);
+        }
+        else {
+          callback.success(result);
+        }
+      });
+    });
+  };
+
   // Update section
   module.update = function(project, callback) {
 

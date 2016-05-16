@@ -1,4 +1,10 @@
 <% layout('layout') -%>
+<% if(!authenticated) { %>
+  <% include ../partials/navbar %>
+<% } %>
+<% if(authenticated) { %>
+  <% include ../partials/navbarUser %>
+<% } %>
 <div class="parallax-container hide-on-small-only">
   <div class="parallax">
     <img src="/images/parallax_google_datacenter.png" alt="Some random google datacenter" class="responsive-img">

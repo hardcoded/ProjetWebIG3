@@ -12,12 +12,12 @@
       <a href="/" class="brand-logo center">Infotech</a>
       <ul class="right hide-on-med-and-down">
         <li><a class="dropdown-button waves-effect waves-light btn-flat" href="/projects" data-activates="projects">Projets</a></li>
-        <li><button class="waves-effect waves-light btn" onclick="window.signin()">Connexion</button></li>
+        <li><a class="waves-effect waves-light btn" href="/signin">Connexion</a></li>
       </ul>
       <ul class="side-nav" id="slide-out">
         <li><a class="waves-effect waves-light btn-flat" href="/">Home</a></li>
         <li><a class="waves-effect waves-light btn-small" href="/projects">Projets</a></li>
-        <li><button class="waves-effect waves-light btn" onclick="window.signin()">Connexion</button></li>
+        <li><a class="waves-effect waves-light btn" href="/signin">Connexion</a></li>
       </ul>
       <a href="#" data-activates="slide-out" class="button-collapse left"><i class="material-icons">menu</i></a>
     </div>
@@ -41,19 +41,4 @@
       alignment: 'left' // Displays dropdown with edge aligned to the left of button
     }
   );
-</script>
-
-<!-- Script to call Auth0 authentication handler -->
-<script src="https://cdn.auth0.com/js/lock-9.1.min.js"></script>
-<script type="text/javascript">
-  var lock = new Auth0Lock('xqW3BC2q2q8nf6VlJlSjauumUNfaxG5X', 'app50173543.auth0.com');
-  function signin() {
-    lock.show({
-      callbackURL: 'http://infotech-polytech.herokuapp.com/callback',
-      responseType: 'code',
-      authParams: {
-        scope: 'openid email'  // Learn about scopes: https://auth0.com/docs/scopes
-      }
-    });
-  }
 </script>

@@ -7,12 +7,11 @@ var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 // for layout views
 var engine = require('ejs-locals');
-var passport = require('passport');
 // Session and cookies middlewares to keep user logged in
 var cookieParser = require('cookie-parser');
-var session = require('express-session');
-// This will configure Passport to use Auth0
-var strategy = require('./setupPassport');
+var passwordHasher = require('password-hash');
+var uuid = require('node-uuid');
+var jwt = require('jsonwebtoken');
 
 app.set('port', (process.env.PORT));
 
@@ -20,10 +19,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cookieParser());
-// See express session docs for information on the options: https://github.com/expressjs/session
-app.use(session({ secret: 'sFxiFSs3PPIX8HNnSyyYFOCZ9HZeL9PSC0X_b5AobiaOD3BT2JxVGNlUxdqbKaZy', resave: false,  saveUninitialized: false }));
-app.use(passport.initialize());
-app.use(passport.session());
+// Create a random secret key to create auth token
+var randomSecretKey = uuid.v4();
 
 // get static files such as CSS
 app.use(express.static(__dirname + '/public'));
@@ -41,22 +38,22 @@ var url = process.env.DATABASE_URL;
 var projectDAO = require('./models/DAO/projectDAO')(pg, url);
 var userDAO = require('./models/DAO/userDAO')(pg, url);
 var rankDAO = require('./models/DAO/rankDAO')(pg, url);
+var sectionDAO = require('./models/DAO/sectionDAO')(pg, url);
 // Routing resources
-require('./routes/homeController').controller(app);
-require('./routes/projectsController').controller(app, {
+var authService = require('./routes/authService')(randomSecretKey, passwordHasher, jwt);
+require('./routes/homeController').controller(app, authService);
+require('./routes/projectsController').controller(app, authService, {
   'projectDAO' : projectDAO,
   'userDAO' : userDAO,
   'rankDAO' : rankDAO
 });
-require('./routes/usersController').controller(app, {});
-
-// Auth0 callback handler
-app.get('/callback', passport.authenticate('auth0', { failureRedirect: '/' }),
-  function(req, res) {
-    if (!req.user) {
-      throw new Error('user null');
-    }
-  res.redirect("/user");
+require('./routes/usersController').controller(app, authService, {
+  'userDAO': userDAO,
+  'sectionDAO': sectionDAO
+});
+require('./routes/authController').controller(app, authService, {
+  'userDAO': userDAO,
+  'sectionDAO': sectionDAO
 });
 
 // catch 404 and forwarding to error handler

@@ -1,10 +1,10 @@
-function User(id, firstName, lastName, mail, pseudo, signupDate, admin, tokens, rank, section) {
+function User(id, firstName, lastName, mail, pseudo, password, admin, tokens, rank, section) {
   this.id = id;
   this.firstName = firstName;
   this.lastName = lastName;
   this.mail = mail;
   this.pseudo = pseudo;
-  this.signupDate = signupDate;
+  this.password = password;
   this.admin = admin,
   this.tokens = tokens;
   this.rank = rank;

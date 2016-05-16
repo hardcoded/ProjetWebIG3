@@ -1,4 +1,5 @@
 <% layout('layout') -%>
+<% include ../partials/navbarUser %>
 <div class="row">
    <form class="col s12" method="post" action="/projects/new">
      <div class="container">
@@ -16,7 +17,7 @@
          <div class="input-field col l12">
            <i class="material-icons prefix">perm_identity</i>
            <p  class="range-field">
-             <input type="range" id="max" min="1" max="8" />
+             <input name="maxHelpers" type="range" id="max" min="1" max="8" />
            </p>
            <label for="max">Participants maximum (min1)</label>
          </div>
@@ -32,14 +33,14 @@
          </div>
          <div class="input-field col l12">
            <i class="material-icons prefix">verified_user</i>
-           <input list="ranks" type="text" id="ranks_choose" required="required">
-           <datalist id="ranks">
-             <% ranks.forEach(function(r) { %>
-               <option value="<%= r.name %>">
-             <% }); %>
-           </datalist>
-           <label for="ranks_choose">Rang minimal requis</label>
-         </div>
+            <select name="rank">
+              <option value="" disabled selected>Choisissez un rang</option>
+              <% ranks.forEach(function(r) { %>
+                <option value="<%= r.name %>"><%= r.name %></option>
+              <% }) %>
+            </select>
+          <label>Rang minimal requis</label>
+        </div>
          <div class="input-field col l12">
            <button class="btn waves-effect waves-light col s2 offset-s5" type="submit" name="action">Créer
             <i class="material-icons right">send</i>
@@ -50,7 +51,7 @@
    </form>
  </div>
 
- <script type="text/javascript">
+<script type="text/javascript">
   $(function() {
     $(document).ready(function() {
       $('#name, #description').characterCounter();
@@ -59,5 +60,6 @@
   $('.datepicker').pickadate({
    selectMonths: true, // Creates a dropdown to control month
    selectYears: 15 // Creates a dropdown of 15 years to control year
- });
-  </script>
+  });
+  $('select').material_select();
+</script>
