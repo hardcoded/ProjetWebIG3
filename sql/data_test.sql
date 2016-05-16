@@ -19,20 +19,10 @@ INSERT INTO section(acronym, name) VALUES ('MEA', 'Microélectronique et automat
 INSERT INTO section(acronym, name) VALUES ('STE', 'Sciences et technologies de l''eau');
 
 /* Create accounts */
-INSERT INTO account(first_name, last_name, mail, pseudo, signup_date, admin, tokens, rank, section) VALUES ('Johan', 'Brunet', 'brunet.johan.23@gmail.com', 'JohanBrunet', CURRENT_DATE, true, '42000000', 1, 2);
-INSERT INTO account(first_name, last_name, mail, pseudo, signup_date, admin, tokens, rank, section) VALUES ('Théo', 'Gauchoux', 't.g@mail.com', 'TGauchoux', CURRENT_DATE, false, '42000000', 1, 2);
-INSERT INTO account(first_name, last_name, mail, pseudo, signup_date, admin, tokens, rank, section) VALUES ('Charlène', 'Pizzoni', 'c.p@mail.com', 'CPizzoni', CURRENT_DATE, false, '30', 7, 2);
-INSERT INTO account(first_name, last_name, mail, pseudo, signup_date, admin, tokens, rank, section) VALUES ('Mehdi', 'Fakihani', 'm.f@mail.com', 'MFakihani', CURRENT_DATE, false, '0', 9, 2);
-INSERT INTO account(first_name, last_name, mail, pseudo, signup_date, admin, tokens, rank, section) VALUES ('Quentin', 'Bouygues', 'q.b@mail.com', 'QBouygues', CURRENT_DATE, false, '65', 3, 2);
+INSERT INTO account(first_name, last_name, mail, pseudo, password, admin, tokens, rank, section) VALUES ('Johan', 'BRUNET', 'brunet.johan.23@gmail.com', 'Johanonyme', 'sha1$5c9ac5ab$1$7a19b172fdc642c780684b7a8a22feef5d57aefa', true, 0, '9', '2');
 
 /* Create projects */
 INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('Infotech', 'Site web du club d''informatique de Polytech Montpellier', '1', '2016-04-30', '2016-05-16', '30', 3, 1);
-INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('Polythèque', 'Projet Java de gestion de ludothèque', '5', '2015-10-20', '2016-01-20', '80', 5, 1);
-INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('Jarvis', 'Just A Rather Intelligent System', '1', '2016-04-30', '2016-05-16', '60', 2, 2);
-INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('G2ATools', 'Application web pour alertes G2A', '1', '2016-04-30', '2016-05-16', '30', 4, 5);
 
 /* Create helpers */
 INSERT INTO participate(id_project, id_helper) VALUES (1, 1);
-INSERT INTO participate(id_project, id_helper) VALUES (2, 1);
-INSERT INTO participate(id_project, id_helper) VALUES (3, 2);
-INSERT INTO participate(id_project, id_helper) VALUES (4, 5);

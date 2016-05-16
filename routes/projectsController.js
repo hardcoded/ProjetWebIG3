@@ -120,7 +120,7 @@ module.exports.controller = function(app, auth, DAOs) {
   app.post('/projects/new', function(req, res) {
     auth.authenticate(req, {
       success: function(id) {
-        var project = new Project(-1,req.body.projectName, req.body.projectDesc, req.body.maxHelpers,req.body.startDate, req.body.endDate, 0, req.body.rank, id);
+        var project = new Project(-1, req.body.projectName, req.body.projectDesc, req.body.maxHelpers,req.body.startDate, req.body.endDate, 0, req.body.rank, id);
         DAOs.projectDAO.create(project, {
           success : function(result) {
             res.status(201);
