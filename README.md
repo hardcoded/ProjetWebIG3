@@ -1,39 +1,27 @@
-# node-js-getting-started
+# Infotech
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
+## Origine du projet
 
-This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
+Le club informatique de Polytech Montpellier, Infotech, a pour ambition de rassembler des étudiants autour de projets informatiques qui leur tiennent à coeur.
+Pour cela, il est apparu la nécessité d'avoir une application permettant aux adhérents du club de partager leurs projets.
 
-## Running Locally
+## Fonctionnalités
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
+### Non connecté
 
-```sh
-$ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
-$ npm install
-$ npm start
-```
+Si l'utilisateur n'est pas connecté, il ne peux accéder qu'à la visualisation des projets.
+Il lui est alors offert deux services :
+* voir la liste des projets partagés
+* accéder aux détails d'un projet en particulier
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+### Connecté
 
-## Deploying to Heroku
+Lorsque l'utilisateur a créé un compte et se connecte, il accède a des fonctionnalités supplémentaires :
+* créer un nouveau projet à partager
+* modifier un projet qu'il a créé
+* supprimer l'un de ses projets
 
-```
-$ heroku create
-$ git push heroku master
-$ heroku open
-```
-or
+## Partage des projets
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-## Documentation
-
-For more information about using Node.js on Heroku, see these Dev Center articles:
-
-- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
+Pour le moment, lorsqu'un projet est partagé et qu'une personne est intéressée elle doit s'arranger en personne avec celui/celle qui a partagé le projet en question.
+Pour cela, l'affichage détaillé d'un projet renseigne le propriétaire de ce projet.
