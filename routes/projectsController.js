@@ -13,7 +13,7 @@ module.exports.controller = function(app, auth, DAOs) {
             DAOs.projectDAO.getAll({
               success : function(result) {
                 res.status(200);
-                res.render('pages/projects', { title: 'Projets', mess: "Projets soutenus par Infotech", projects: result.rows, authenticated: true, owner: id, , isAdmin: user.admin});
+                res.render('pages/projects', { title: 'Projets', mess: "Projets soutenus par Infotech", projects: result.rows, authenticated: true, owner: id, isAdmin: user.admin});
               },
               fail : function(err) {
                 res.status(404);
@@ -51,7 +51,7 @@ module.exports.controller = function(app, auth, DAOs) {
             DAOs.rankDAO.getAll({
               success : function(result) {
                 res.status(200);
-                res.render('pages/createProject', {title: 'New Project', ranks: result.rows, authenticated: true, , isAdmin: user.admin});
+                res.render('pages/createProject', {title: 'New Project', ranks: result.rows, authenticated: true, isAdmin: user.admin});
               },
               fail : function(err) {
                 res.status(404);
