@@ -1,0 +1,38 @@
+<% layout('layout') -%>
+<% if(!authenticated) { %>
+  <% include ../partials/navbar %>
+<% }; %>
+<% if(authenticated && !isAdmin) { %>
+  <% include ../partials/navbarUser %>
+<% }; %>
+<% if(authenticated && isAdmin) { %>
+  <% include ../partials/navbarAdmin %>
+<% }; %>
+<div class="container" id="card-container">
+  <div class="row">
+    <div class="card col l6 offset-l3 center-align" id="my-card">
+      <div class="card-header">
+        <h2 class="card-title header grey-text"><strong><%= user.pseudo %></strong></h2>
+      </div>
+      <div class="card-content">
+        <div class="section">
+          <i class="material-icons">perm_identity</i>Name
+          <br>
+          <%= user.firstName user.lastName %>
+        </div>
+        <div class="divider"></div>
+        <div class="section">
+          <i class="material-icons">email</i>Mail
+          <br>
+          <%= user.mail %>
+        </div>
+        <div class="divider"></div>
+        <div class="section">
+          <i class="material-icons">verified_user</i>Admin
+          <br>
+          <%= user.admin %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

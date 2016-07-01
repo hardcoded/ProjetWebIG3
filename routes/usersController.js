@@ -20,7 +20,7 @@ module.exports.controller = function(app, auth,  DAOs) {
               });
             }
             else {
-              res.redirect('/')
+              res.redirect('/');
             }
           },
           fail : function(err) {
@@ -29,16 +29,7 @@ module.exports.controller = function(app, auth,  DAOs) {
         });
       },
       fail: function() {
-        DAOs.projectDAO.getAll({
-          success : function(result) {
-            res.status(200);
-            res.render('pages/projects', {title: 'Projets', mess: "Projets soutenus par Infotech", projects: result.rows, authenticated: false, owner: null});
-          },
-          fail : function(err) {
-            res.status(404);
-            res.render('pages/error');
-          }
-        });
+        res.redirect('/signin');
       }
     });
   });
@@ -60,6 +51,26 @@ module.exports.controller = function(app, auth,  DAOs) {
       },
       fail: function() {
         res.redirect('/signin');
+      }
+    });
+  });
+
+  app.get('/users/:id', function(req, res) {
+    auth.authenticate(req, {
+      success: function(id) {
+        DAOs.userDAO.getById(req.params.id, {
+          success : function(user) {
+            res.status(200);
+            res.render('pages/userDetails', {title: 'User details', user: user, authenticated: true, isAdmin: user.admin});
+          },
+          fail : function(err) {
+            res.status(404);
+            res.render('pages/error', {title: 'Erreur', error: err});
+          }
+        });
+      },
+      fail: function() {
+        res.redirect('/signin')
       }
     });
   });
