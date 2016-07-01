@@ -1,10 +1,17 @@
-module.exports.controller = function(app, auth) {
+module.exports.controller = function(app, auth, DAOs) {
   /* GET home page */
   app.get('/', function(req, res) {
     auth.authenticate(req, {
       success: function(id) {
-        res.status(200);
-        res.render('pages/index', {title: 'Infotech', authenticated: true});
+        DAOs.userDAO.getById(id, {
+          success : function(user) {
+            res.status(200);
+            res.render('pages/index', {title: 'Infotech', authenticated: true, isAdmin: user.admin});
+          },
+          fail function(err) {
+
+          }
+        });
       },
       fail: function() {
         res.status(200);
