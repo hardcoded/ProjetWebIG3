@@ -83,7 +83,23 @@ module.exports = function(db, url) {
 
     // Update a user
   module.update = function(user, callback) {
-
+    db.connect(url, function(err, client, done) {
+      var queryString = 'UPDATE account SET first_name=$1, last_name=$2, mail=$3, pseudo=$4, admin=$5, section=$6 WHERE id=$7 RETURNING id';
+      client.query(queryString, [user.firstName, user.lastName, user.mail, user.pseudo, user.admin, user.section, user.id], function(err, result) {
+        done();
+        if (err) {
+          console.error(err);
+          callback.fail(err);
+        }
+        else if (result.rowCount == 0) {
+          callback.fail(null);
+        }
+        else {
+          user.id = result.rows[0].id;
+          callback.success(project);
+        }
+      });
+    });
   };
 
   // Delete a user
