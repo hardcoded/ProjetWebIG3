@@ -8,10 +8,18 @@ module.exports.controller = function(app, auth, DAOs) {
   app.get('/projects', function(req, res) {
     auth.authenticate(req, {
       success: function(id) {
-        DAOs.projectDAO.getAll({
-          success : function(result) {
-            res.status(200);
-            res.render('pages/projects', { title: 'Projets', mess: "Projets soutenus par Infotech", projects: result.rows, authenticated: true, owner: id });
+        DAOs.userDAO.getById(id, {
+          success : function(user) {
+            DAOs.projectDAO.getAll({
+              success : function(result) {
+                res.status(200);
+                res.render('pages/projects', { title: 'Projets', mess: "Projets soutenus par Infotech", projects: result.rows, authenticated: true, owner: id, , isAdmin: user.admin});
+              },
+              fail : function(err) {
+                res.status(404);
+                res.render('pages/error');
+              }
+            });
           },
           fail : function(err) {
             res.status(404);
@@ -38,10 +46,18 @@ module.exports.controller = function(app, auth, DAOs) {
   app.get('/projects/new', function(req, res) {
     auth.authenticate(req, {
       success: function(id) {
-        DAOs.rankDAO.getAll({
-          success : function(result) {
-            res.status(200);
-            res.render('pages/createProject', {title: 'New Project', ranks: result.rows, authenticated: true});
+        DAOs.userDAO.getById(id, {
+          success : function(user) {
+            DAOs.rankDAO.getAll({
+              success : function(result) {
+                res.status(200);
+                res.render('pages/createProject', {title: 'New Project', ranks: result.rows, authenticated: true, , isAdmin: user.admin});
+              },
+              fail : function(err) {
+                res.status(404);
+                res.render('pages/error');
+              }
+            });
           },
           fail : function(err) {
             res.status(404);
@@ -60,30 +76,38 @@ module.exports.controller = function(app, auth, DAOs) {
   app.get('/projects/:id/update', function(req, res) {
     auth.authenticate(req, {
       success: function(id) {
-        DAOs.projectDAO.getById(req.params.id, {
-          success: function(proj) {
-            DAOs.rankDAO.getAll({
-              success: function(rank) {
-                if(id == proj.owner) {
-                  proj.start = dateFormat(proj.start, "fullDate");
-                  proj.end = dateFormat(proj.end, "fullDate");
-                  res.status(200);
-                  res.render('pages/updateProject', {title: 'Modifier projet', project: proj, ranks: rank.rows, authenticated:true})
-                }
-                else {
-                  res.redirect('/user/projects');
-                }
+        DAOs.userDAO.getById(id, {
+          success : function(user) {
+            DAOs.projectDAO.getById(req.params.id, {
+              success: function(proj) {
+                DAOs.rankDAO.getAll({
+                  success: function(rank) {
+                    if(id == proj.owner) {
+                      proj.start = dateFormat(proj.start, "fullDate");
+                      proj.end = dateFormat(proj.end, "fullDate");
+                      res.status(200);
+                      res.render('pages/updateProject', {title: 'Modifier projet', project: proj, ranks: rank.rows, authenticated:true, isAdmin: user.admin});
+                    }
+                    else {
+                      res.redirect('/user/projects');
+                    }
+                  },
+                  fail: function(err) {
+                    res.render('pages/error', {title: 'Erreur', error: err});
+                  }
+                });
               },
               fail: function(err) {
+                res.status(404);
                 res.render('pages/error', {title: 'Erreur', error: err});
               }
             });
           },
-          fail: function(err) {
+          fail : function(err) {
             res.status(404);
             res.render('pages/error', {title: 'Erreur', error: err});
           }
-        })
+        });
       },
       fail: function() {
         res.redirect('/signin');
@@ -104,7 +128,7 @@ module.exports.controller = function(app, auth, DAOs) {
                     project.start = dateFormat(project.start, "fullDate");
                     project.end = dateFormat(project.end, "fullDate");
                     res.status(200);
-                    res.render('pages/projectDetails', {title: 'Project details', project: project, user: user, rank: rank, authenticated: true});
+                    res.render('pages/projectDetails', {title: 'Project details', project: project, user: user, rank: rank, authenticated: true, isAdmin: user.admin});
                   },
                   fail : function(err) {
                     res.status(404);

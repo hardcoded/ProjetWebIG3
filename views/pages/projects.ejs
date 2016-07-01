@@ -2,8 +2,11 @@
 <% if(!authenticated) { %>
   <% include ../partials/navbar %>
 <% }; %>
-<% if(authenticated) { %>
+<% if(authenticated && !isAdmin) { %>
   <% include ../partials/navbarUser %>
+<% }; %>
+<% if(authenticated && isAdmin) { %>
+  <% include ../partials/navbarAdmin %>
 <% }; %>
 <div class="container">
   <h1> <%= mess %> </h1>

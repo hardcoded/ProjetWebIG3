@@ -1,5 +1,13 @@
 <% layout('layout') -%>
-<% include ../partials/navbarUser %>
+<% if(!authenticated) { %>
+  <% include ../partials/navbar %>
+<% }; %>
+<% if(authenticated && !isAdmin) { %>
+  <% include ../partials/navbarUser %>
+<% }; %>
+<% if(authenticated && isAdmin) { %>
+  <% include ../partials/navbarAdmin %>
+<% }; %>
 <div class="row">
    <form class="col s12" method="post" action="/projects/<%= project.id %>/update">
      <div class="container">
