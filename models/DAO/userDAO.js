@@ -104,7 +104,19 @@ module.exports = function(db, url) {
 
   // Delete a user
   module.delete = function(id, callback) {
-
+    db.connect(url, function(err, client, done) {
+      var queryString = 'DELETE FROM account WHERE id = $1';
+      client.query(queryString, [id], function(err, result) {
+        done();
+        if (err) {
+          console.error(err);
+          callback.fail(err);
+        }
+        else {
+          callback.success(result);
+        }
+      });
+    });
   };
 
   return module;

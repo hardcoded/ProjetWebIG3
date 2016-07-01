@@ -8,8 +8,8 @@ module.exports.controller = function(app, auth, DAOs) {
             res.status(200);
             res.render('pages/index', {title: 'Infotech', authenticated: true, isAdmin: user.admin});
           },
-          fail function(err) {
-
+          fail : function(err) {
+            res.render('pages/error');
           }
         });
       },

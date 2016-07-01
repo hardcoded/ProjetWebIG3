@@ -39,7 +39,7 @@ CREATE TABLE project (
   end_date DATE NOT NULL,
   achievment INTEGER,
   rank_required SERIAl REFERENCES rank(id),
-  owner SERIAL REFERENCES account(id),
+  owner SERIAL REFERENCES account(id) ON DELETE CASCADE,
   CHECK (start_date < end_date)
 );
 

@@ -42,7 +42,9 @@ var sectionDAO = require('./models/DAO/sectionDAO')(pg, url);
 var participateDAO = require('./models/DAO/participateDAO')(pg, url);
 // Routing resources
 var authService = require('./routes/authService')(randomSecretKey, passwordHasher, jwt);
-require('./routes/homeController').controller(app, authService);
+require('./routes/homeController').controller(app, authService, {
+  'userDAO' : userDAO
+});
 require('./routes/projectsController').controller(app, authService, {
   'projectDAO' : projectDAO,
   'userDAO' : userDAO,

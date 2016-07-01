@@ -21,6 +21,7 @@ INSERT INTO section(acronym, name) VALUES ('STE', 'Sciences et technologies de l
 /* Create accounts */
 INSERT INTO account(first_name, last_name, mail, pseudo, password, admin, tokens, rank, section) VALUES ('Johan', 'BRUNET', 'brunet.johan.23@gmail.com', 'Johanonyme', 'sha1$5c9ac5ab$1$7a19b172fdc642c780684b7a8a22feef5d57aefa', true, 0, '1', '2');
 INSERT INTO account(first_name, last_name, mail, pseudo, password, admin, tokens, rank, section) VALUES ('User', 'Test', 'user.test@mail.fr', 'testuser', 'sha1$96c3a714$1$fbb287a4f0d418d6ac46a18d5b2548e72d71eade', false, 0, '9', '2');
+INSERT INTO account(first_name, last_name, mail, pseudo, password, admin, tokens, rank, section) VALUES ('Almighty', 'admin', 'admin@mail.fr', 'admin', 'sha1$5c9ac5ab$1$7a19b172fdc642c780684b7a8a22feef5d57aefa', true, 0, '9', '2');
 
 /* Create projects */
 INSERT INTO project(name, description, max_helpers, start_date, end_date, achievment, rank_required, owner) VALUES ('Infotech', 'Site web du club d''informatique de Polytech Montpellier', '1', '2016-04-30', '2016-05-16', '30', 3, 1);

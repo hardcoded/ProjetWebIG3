@@ -1,0 +1,63 @@
+<% layout('layout') -%>
+<% if(!authenticated) { %>
+  <% include ../partials/navbar %>
+<% }; %>
+<% if(authenticated && !isAdmin) { %>
+  <% include ../partials/navbarUser %>
+<% }; %>
+<% if(authenticated && isAdmin) { %>
+  <% include ../partials/navbarAdmin %>
+<% }; %>
+<div class="container">
+  <h1> <%= mess %> </h1>
+  <table class="highlight responsive-table centered">
+    <thead>
+      <tr>
+          <th data-field="id">ID</th>
+          <th data-field="first_name">First name</th>
+          <th data-field="last_name">Last name</th>
+          <th data-field="mail">Mail</th>
+          <th data-field="pseudo">Pseudo</th>
+          <th data-field="admin">Admin</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% users.forEach(function(user) { %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.mail %></td>
+            <td><%= user.pseudo %></td>
+            <% if(user.admin) { %>
+              <td>
+                <i class="material-icons center">done</i>
+              </td>
+            <% }; %>
+            <% if(!user.admin) { %>
+              <td> X </td>
+            <% }; %>
+
+            <td>
+              <a class="waves-effect waves-light btn" href='/users/<%= user.id %>'>
+                <i class="material-icons right">launch</i>Détails
+              </a>
+            </td>
+            <td>
+              <a class="waves-effect waves-light btn" href='/users/<%= user.id %>/update'>
+                <i class="material-icons right">mode_edit</i>
+              </a>
+            </td>
+            <td>
+              <form method="post" action="/users/<%= user.id %>/delete">
+                <button class="btn waves-effect waves-light" type="submit" name="action">
+                  <i class="material-icons right">delete</i>
+                </button>
+              </form>
+            </td>
+          </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>
